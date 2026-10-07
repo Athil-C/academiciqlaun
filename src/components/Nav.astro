@@ -1,4 +1,4 @@
-﻿---
+---
 import Logo from './Logo.astro';
 import Button from './Button.astro';
 import { nav, contacts, hubs, socials } from '../data/site.js';
@@ -33,7 +33,7 @@ const isCurrent = (href) => path === href;
 
   <div class="wrap menu__body">
     <nav class="menu__list" aria-label="All pages">
-      <a class="menu__item" href="/" aria-current={isCurrent('/') ? 'page' : undefined} data-menu-in>
+      <a class="menu__item" href={import.meta.env.BASE_URL} aria-current={isCurrent(import.meta.env.BASE_URL) ? 'page' : undefined} data-menu-in>
         <span class="menu__no">00</span>
         <span class="menu__name">Home</span>
         <span class="menu__note">Connecting Minds. Creating Opportunities.</span>

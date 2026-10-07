@@ -1,4 +1,4 @@
-﻿---
+---
 import '@fontsource-variable/anek-latin/wdth.css';
 import '@fontsource-variable/fraunces/opsz-italic.css';
 import '@fontsource-variable/jetbrains-mono/wght.css';
@@ -32,7 +32,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site || 'https://academiq.or
     <meta name="description" content={description} />
     <meta name="theme-color" content="#09090a" />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
     <link rel="preload" as="font" type="font/woff2" href={anekUrl} crossorigin />
 
     <meta property="og:type" content="website" />

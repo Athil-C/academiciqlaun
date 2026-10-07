@@ -1,5 +1,5 @@
-﻿---
-const { href = '/', class: className = '' } = Astro.props;
+---
+const { href = import.meta.env.BASE_URL, class: className = '' } = Astro.props;
 ---
 <a class={`logo ${className}`} href={href} aria-label="AcademiQ — Connecting Minds. Creating Opportunities." data-cursor="link">
   <span class="logo__box" aria-hidden="true">AQ</span>

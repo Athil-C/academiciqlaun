@@ -1,8 +1,9 @@
-﻿import { defineConfig } from 'astro/config';
+import { defineConfig } from 'astro/config';
 
 // Static multi-page build. `npm run build` emits plain HTML/CSS/JS into dist/.
 export default defineConfig({
-  site: 'https://academiq.org',
+  site: 'https://athil-c.github.io',
+  base: '/academiciqlaun',
   devToolbar: { enabled: false },
   server: { port: 4321, host: true },
   build: { assets: 'assets' },
