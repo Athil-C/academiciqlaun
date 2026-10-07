@@ -8,13 +8,19 @@ import ApplyForm from '../components/ApplyForm.astro';
 import '../styles/blocks.css';
 import '../styles/pages/home.css';
 
-import { stats, hubs, contacts, award, inr } from '../data/site.js';
+import { stats, hubs, contacts, award, inr, topics } from '../data/site.js';
 import { courses } from '../data/courses.js';
-import { alumni, stories, qualifications, placeNames, initials } from '../data/alumni.js';
-import { phases, principles } from '../data/program.js';
+import { alumni, qualifications, placeNames, initials } from '../data/alumni.js';
+import {
+  phases,
+  principles,
+  teamDivisions,
+  networkGroups,
+  collaborationCategories,
+  opportunityCategories,
+  resourceCategories,
+} from '../data/program.js';
 
-const ticker = alumni.slice(0, 14);
-const rail = alumni.slice(0, 16);
 const nonItCount = Math.floor((stats.learners * stats.nonIt) / 100);
 const itCount = stats.learners - nonItCount;
 
@@ -42,8 +48,8 @@ const map = hubs.map((h) => ({
   <section class="hero section--clear" data-theme="dark" data-stop="hero">
     <div class="wrap hero__inner">
       <div class="hero__top mono" data-hero-fade>
-        <span class="hero__status"><span class="dot"></span>Global Ecosystem • Connecting Minds</span>
-        <span class="hero__award">EST. 2065 — GROWING GLOBALLY</span>
+        <span class="hero__status"><span class="dot"></span>Connecting Minds. Creating Opportunities.</span>
+        <span class="hero__award">EST. 2025 — GROWING GLOBALLY</span>
       </div>
 
       <div class="hero__mid" aria-hidden="true"></div>
@@ -63,13 +69,13 @@ const map = hubs.map((h) => ({
 
       <div class="hero__foot">
         <p class="hero__lead lead" data-hero-fade>
-          AcademiQ is a growing global ecosystem connecting students, researchers, scholars and institutions through
+          AcademIQ is a growing global academic ecosystem connecting students, researchers, scholars, mentors and institutions through
           education, research, mentorship and <strong>meaningful opportunities.</strong>
         </p>
 
         <div class="hero__cta" data-hero-fade>
           <Button href="#apply" label="Join AcademiQ" size="lg" />
-          <Button href="#who-we-are" label="Explore Ecosystem" variant="ghost" size="lg" />
+          <Button href="#who-we-are" label="Explore AcademiQ" variant="ghost" size="lg" />
         </div>
 
         <ul class="hero__facts" data-hero-fade>
@@ -83,7 +89,7 @@ const map = hubs.map((h) => ({
     <div class="pin" data-pin aria-hidden="true">
       <i class="pin__line"></i>
       <div class="pin__text mono">
-        <b>AcademiQ Global</b>
+        <b>AcademIQ Global</b>
         <span>28.61° N • 77.20° E</span>
         <span class="accent">→ connected in 30+ countries</span>
       </div>
@@ -91,11 +97,11 @@ const map = hubs.map((h) => ({
 
     <div class="hero__ticker" data-hero-fade>
       <Marquee speed={62} class="ticker" data-pause>
-        {['OPPORTUNITIES', 'INTERNATIONAL AFFAIRS', 'YOUTH DEVELOPMENT', 'MENTORSHIP', 'KNOWLEDGE SHARING', 'EDUCATION', 'RESEARCH'].map((topic) => (
+        {['EDUCATION', 'RESEARCH', 'OPPORTUNITIES', 'INTERNATIONAL AFFAIRS', 'YOUTH', 'KNOWLEDGE SHARING', 'MENTORSHIP'].map((topic) => (
           <span class="mq__item ticker__item">
             <span class="ticker__name">{topic}</span>
             <span class="ticker__arrow" aria-hidden="true"><Arrow dir="e" /></span>
-            <span class="ticker__co">AcademiQ</span>
+            <span class="ticker__co">AcademIQ</span>
             <span class="ticker__lpa">Global</span>
           </span>
         ))}
@@ -111,25 +117,27 @@ const map = hubs.map((h) => ({
       </div>
 
       <p class="mani__text" data-scrub-words>
-        More than a community. An ecosystem where learning, research, mentorship and opportunity reinforce each other.
-        <em>Talent, wherever it lives, deserves pathways.</em>
+        More than a community. An ecosystem. Where learning, research, mentorship and opportunity reinforce one another.
+        <em>Talent should not be limited by geography, background or access.</em>
       </p>
 
       <div class="mani__aside">
         <p class="body" data-reveal="up">
-          AcademiQ brings together students, young researchers, scholars, mentors and institutions in one connected space.
-          We exist so that talent can find the knowledge, people and pathways it deserves. An academic culture that is open, rigorous, generous and global.
+          AcademIQ brings together students, young researchers, scholars, mentors and institutions in one connected space — where learning, research, mentorship and opportunity reinforce one another.
         </p>
-        <div data-reveal="up">
-          <Button href="#what-we-do" label="Discover our six pillars" variant="ghost" />
+        <p class="body" data-reveal="up" style="margin-top:0.75rem">
+          We believe talent should not be limited by geography, background or access. Every curious mind deserves access to knowledge, guidance, meaningful connections and opportunities to grow. AcademiQ is building a culture of academic curiosity, collaboration and integrity — creating pathways for people to learn, contribute and connect with the wider world.
+        </p>
+        <div data-reveal="up" style="margin-top:1.25rem">
+          <Button href="#what-we-do" label="Explore Six Pillars" variant="ghost" />
         </div>
       </div>
     </div>
 
     <div class="mani__from">
       <div class="wrap mani__from-head">
-        <span class="mono dim">Our global network welcomes</span>
-        <span class="mono dim">EST. 2026 • GROWING GLOBALLY</span>
+        <span class="mono dim">The AcademIQ Community — learning, researching, discussing and building together</span>
+        <span class="mono dim">EST. 2025 • GROWING GLOBALLY</span>
       </div>
       <Marquee speed={90} class="quals">
         {qualifications.map((q) => (
@@ -137,7 +145,7 @@ const map = hubs.map((h) => ({
         ))}
       </Marquee>
       <Marquee speed={70} dir={1} class="quals quals--b">
-        {['Higher Education', 'Research Cohorts', 'Academic Writing', 'Fellowships & Grants', 'Mentorship Circles', 'Youth Diplomacy', 'Institutional Alliances', 'Global Exchanges'].map((q) => (
+        {['Higher Education', 'Research', 'Academic Development', 'Opportunities', 'Mentorship & Networking', 'Global Engagement'].map((q) => (
           <span class="mq__item quals__item"><span>{q}</span><i aria-hidden="true">•</i></span>
         ))}
       </Marquee>
@@ -147,92 +155,72 @@ const map = hubs.map((h) => ({
   <!-- ══════════════════════════════════════════════════════════ 02 OUR REACH ══════════════════════════════════════════════════════════ -->
   <section class="nums section" data-theme="paper" id="reach">
     <div class="wrap">
-      <SectionHead no="02" label="Our reach" meta="Figures updated as they are verified">
+      <SectionHead no="02" label="Our reach" meta="*Figures will be updated as our community and programmes grow.*">
         <Fragment slot="title">A network in<br /><span class="serif accent">motion.</span></Fragment>
         <p class="body" data-reveal="up">
-          From South Asia to international research circles. Connecting ambitious minds, opening scholarship doors, and publishing with rigour.
+          AcademIQ is growing through people, ideas and collaborations.
         </p>
       </SectionHead>
 
       <div class="nums__grid">
         <article class="num num--hero card" data-reveal="up">
-          <header class="num__top mono"><span>01</span><span>Learners</span></header>
+          <header class="num__top mono"><span>01</span><span>Students</span></header>
           <p class="num__value"><span data-odo={inr(stats.learners)}>{inr(stats.learners)}</span><span class="num__unit num__unit--after">+</span></p>
           <footer class="num__foot">
-            <h3 class="h4">Learners Enrolled</h3>
-            <p class="small">Across {stats.institutions}+ partner universities and institutions.</p>
+            <h3 class="h4">Students</h3>
+            <p class="small">Curious minds beginning their academic journey.</p>
           </footer>
           <figure class="dots" data-cursor="none">
             <canvas data-dots data-count={stats.learners} data-share={stats.nonIt / 100} aria-hidden="true"></canvas>
             <figcaption class="mono">
-              <span>One dot, one aspiring scholar</span>
-              <span><i class="dots__key dots__key--a"></i>Interdisciplinary <i class="dots__key dots__key--b"></i>Technical</span>
+              <span>One dot, one aspiring mind</span>
+              <span><i class="dots__key dots__key--a"></i>Students <i class="dots__key dots__key--b"></i>Scholars</span>
             </figcaption>
           </figure>
         </article>
 
         <article class="num card" data-reveal="up" data-tilt="4">
-          <header class="num__top mono"><span>02</span><span>Institutions</span></header>
-          <p class="num__value"><span data-odo={String(stats.institutions)}>{stats.institutions}</span><span class="num__unit num__unit--after">+</span></p>
+          <header class="num__top mono"><span>02</span><span>Researchers</span></header>
+          <p class="num__value"><span>Active</span></p>
           <footer class="num__foot">
-            <h3 class="h4">Partner Institutions</h3>
-            <p class="small">Universities, research groups, and educational organizations.</p>
+            <h3 class="h4">Young Researchers</h3>
+            <p class="small">Young researchers exploring questions that matter.</p>
           </footer>
         </article>
 
         <article class="num card" data-reveal="up" data-tilt="4">
-          <header class="num__top mono"><span>03</span><span>Countries</span></header>
-          <p class="num__value"><span data-odo={String(stats.countries)}>{stats.countries}</span><span class="num__unit num__unit--after">+</span></p>
+          <header class="num__top mono"><span>03</span><span>Scholars &amp; Academics</span></header>
+          <p class="num__value"><span>Global</span></p>
           <footer class="num__foot">
-            <h3 class="h4">Countries Reached</h3>
-            <p class="small">A truly borderless community connecting knowledge across continents.</p>
+            <h3 class="h4">Scholars &amp; Academics</h3>
+            <p class="small">Experienced voices sharing knowledge and perspective.</p>
           </footer>
         </article>
 
         <article class="num num--red card" data-theme="red" data-reveal="up" data-tilt="3">
-          <header class="num__top mono"><span>04</span><span>Initiatives</span></header>
-          <p class="num__value"><span data-odo={String(stats.initiatives)}>{stats.initiatives}</span><span class="num__unit num__unit--after">+</span></p>
+          <header class="num__top mono"><span>04</span><span>Mentors</span></header>
+          <p class="num__value"><span>1:1</span></p>
           <footer class="num__foot">
-            <h3 class="h4">Research Initiatives</h3>
-            <p class="small">Active working groups, writing labs, and academic projects.</p>
+            <h3 class="h4">Mentors</h3>
+            <p class="small">People helping others navigate academic and professional pathways.</p>
           </footer>
         </article>
 
-        <article class="num num--bg card" data-reveal="up" data-bg>
-          <header class="num__top mono"><span>05</span><span>Who are our scholars?</span></header>
-
-          <div class="bg__switch" role="tablist" aria-label="Select your background">
-            <button class="bg__tab is-active" role="tab" aria-selected="true" data-bg-tab="non" data-cursor="link" type="button">Undergraduate &amp; Graduate</button>
-            <button class="bg__tab" role="tab" aria-selected="false" data-bg-tab="it" data-cursor="link" type="button">Doctoral &amp; Faculty</button>
-          </div>
-
-          <div class="bg__read">
-            <p class="num__value bg__value">
-              <span data-bg-value>{stats.nonIt}</span><span class="num__unit num__unit--after">%</span>
-            </p>
-            <p class="bg__text" data-bg-text aria-live="polite">
-              Over <strong>{inr(nonItCount)}</strong> learners are emerging students building capability from the ground up across diverse academic disciplines.
-            </p>
-          </div>
-
-          <div class="bg__bar" data-bg-bar aria-hidden="true" data-non={stats.nonIt} data-it={stats.it}>
-            {Array.from({ length: 40 }).map(() => <i></i>)}
-          </div>
-
-          <template data-bg-copy="non">
-            Over <strong>{inr(nonItCount)}</strong> learners are emerging students building capability from the ground up across diverse academic disciplines.
-          </template>
-          <template data-bg-copy="it">
-            Around <strong>{inr(itCount)}</strong> members are doctoral researchers and faculty mentors guiding cohorts, peer review, and academic inquiries.
-          </template>
+        <article class="num card" data-reveal="up" data-tilt="4">
+          <header class="num__top mono"><span>05</span><span>Institutions</span></header>
+          <p class="num__value"><span data-odo={String(stats.institutions)}>{stats.institutions}</span><span class="num__unit num__unit--after">+</span></p>
+          <footer class="num__foot">
+            <h3 class="h4">Institutions</h3>
+            <p class="small">Universities, organisations and communities working together.</p>
+          </footer>
         </article>
 
         <article class="num card" data-reveal="up" data-tilt="4">
-          <header class="num__top mono"><span>06</span><span>Global Hubs</span></header>
-          <p class="num__value"><span data-odo={String(stats.hubs)}>{stats.hubs}</span><span class="num__unit num__unit--after"> Chapters</span></p>
+          <header class="num__top mono"><span>06</span><span>Global Connections</span></header>
+          <p class="num__value"><span data-odo={String(stats.countries)}>{stats.countries}</span><span class="num__unit num__unit--after">+</span></p>
           <footer class="num__foot">
-            <h3 class="h4">Active Chapters Worldwide</h3>
-            <p class="small">New Delhi, wayand, Bengaluru, London, Boston, Singapore — and online everywhere.</p>
+            <h3 class="h4">Global Connections</h3>
+            <p class="small">Building bridges between people, ideas and opportunities across borders.</p>
           </footer>
         </article>
       </div>
@@ -243,34 +231,34 @@ const map = hubs.map((h) => ({
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════════════════════ 03 FOUNDATIONS ══════════════════════════════════════════════════════════ -->
-  <section class="pap section section--clear" data-theme="dark" data-stop="rupee" id="foundations">
+  <!-- ══════════════════════════════════════════════════════════ 03 OUR STORY ══════════════════════════════════════════════════════════ -->
+  <section class="pap section section--clear" data-theme="dark" data-stop="rupee" id="story">
     <div class="wrap pap__grid">
       <header class="pap__head">
-        <span class="label"><span class="label__no">03</span> Foundations</span>
-        <h2 class="h1 pap__title" data-reveal="lines">Building an ecosystem around <span class="serif accent">knowledge.</span></h2>
+        <span class="label"><span class="label__no">03</span> Our story</span>
+        <h2 class="h1 pap__title" data-reveal="lines">Building an ecosystem around <span class="serif accent">knowledge &amp; opportunity.</span></h2>
       </header>
 
       <div class="pap__body">
         <p class="lead" data-reveal="up">
-          Around the world, talented students struggle not with ability, but with access — to guidance, to mentorship, to serious academic communities. Information is scattered and borders still decide too much. AcademiQ closes that gap.
+          Across the world, talented students and researchers often face the same challenge: not a lack of ability, but a lack of access.
         </p>
 
         <ol class="pap__steps">
           <li class="pap__step" data-reveal="up">
             <span class="mono accent">01</span>
-            <h3 class="h4">Learn &amp; Inquire</h3>
-            <p class="small">Rigorous first-principles frameworks, scientific methodologies, and critical thinking.</p>
+            <h3 class="h4">The Challenge</h3>
+            <p class="small">Access to guidance. Access to opportunities. Access to mentors. Access to research communities. Access to people who can open new doors.</p>
           </li>
           <li class="pap__step" data-reveal="up">
             <span class="mono accent">02</span>
-            <h3 class="h4">Connect &amp; Mentor</h3>
-            <p class="small">Direct pairing with doctoral scholars and faculty across borders for serious guidance.</p>
+            <h3 class="h4">Why AcademiQ</h3>
+            <p class="small">Information is everywhere, but meaningful academic pathways are often scattered and difficult to navigate. AcademiQ was created to help change that.</p>
           </li>
           <li class="pap__step" data-reveal="up">
             <span class="mono accent">03</span>
-            <h3 class="h4">Publish &amp; Impact</h3>
-            <p class="small">Curated scholarships, conferences, research working groups, and global exchanges.</p>
+            <h3 class="h4">Our Goal</h3>
+            <p class="small">Make knowledge more accessible. Make opportunities easier to discover. Make academic communities more connected.</p>
           </li>
         </ol>
 
@@ -278,37 +266,106 @@ const map = hubs.map((h) => ({
           <div class="stamp" aria-hidden="true" data-stamp>
             <svg viewBox="0 0 200 200">
               <defs><path id="stamp-path" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" /></defs>
-              <text><textPath href="#stamp-path" textLength="482" lengthAdjust="spacing">ACADEMIQ • GLOBAL ECOSYSTEM • EST. 2026 • CONNECTING MINDS •</textPath></text>
+              <text><textPath href="#stamp-path" textLength="482" lengthAdjust="spacing">ACADEMIQ • GLOBAL ECOSYSTEM • EST. 2025 • CONNECTING MINDS •</textPath></text>
             </svg>
             <b>AQ</b>
           </div>
           <div>
-            <h3 class="h4">Our Mission &amp; Vision</h3>
+            <h3 class="h4">Mission &amp; Vision</h3>
             <p class="small">
-              To create an accessible, collaborative ecosystem where students and researchers can learn, connect, discover opportunities, and contribute meaningfully to academia and society across borders.
+              <strong>Mission:</strong> To create an accessible and collaborative ecosystem where students and researchers can learn, connect, discover opportunities and develop the skills needed to contribute meaningfully to academia and society.<br /><br />
+              <strong>Vision:</strong> To grow into a globally connected academic ecosystem where knowledge, people and opportunities move freely across borders.
             </p>
           </div>
         </div>
 
         <div class="pap__cta" data-reveal="up">
-          <Button href="#apply" label="Become an AcademiQ Member" />
-          <span class="mono dimmer">*Open to students, researchers, mentors &amp; institutions</span>
+          <Button href="#apply" label="Join AcademiQ" />
+          <Button href="#what-we-do" label="Explore What We Do" variant="ghost" />
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════════════════════ 04 OUR JOURNEY ══════════════════════════════════════════════════════════ -->
+  <!-- ══════════════════════════════════════════════════════════ 04 WHAT WE DO ══════════════════════════════════════════════════════════ -->
+  <section class="dom section" data-theme="dark" id="what-we-do">
+    <div class="wrap">
+      <SectionHead no="04" label="What we do" meta="Six pillars · One ecosystem">
+        <Fragment slot="title">Six pillars.<br /><span class="serif accent">One ecosystem.</span></Fragment>
+        <p class="body" data-reveal="up">
+          AcademIQ connects different parts of the academic journey — from learning and research to opportunities, mentorship and global engagement.
+        </p>
+      </SectionHead>
+
+      <ul class="dom__list" data-domains>
+        {courses.map((c) => (
+          <li class="dom__item" data-reveal="up">
+            <a class="dom__row" href="#apply" data-cursor="view" data-domain data-glyph={c.glyph} data-line={c.line} data-family={c.family}>
+              <span class="dom__no mono">{c.no}</span>
+              <span class="dom__name">{c.name}</span>
+              <span class="dom__stacks mono">
+                {(c.stacks.length ? c.stacks : ['Core Pillar']).slice(0, 4).join(' • ')}
+              </span>
+              <span class="dom__arrow" aria-hidden="true"><Arrow /></span>
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <div class="dom__more" data-reveal="up">
+        <Button href="#apply" label="Get Involved" variant="ghost" />
+      </div>
+    </div>
+
+    <div class="peek" data-domain-peek aria-hidden="true">
+      <div class="peek__card">
+        <span class="peek__family mono" data-peek-family>Pillar</span>
+        <span class="peek__glyph" data-peek-glyph>🎓</span>
+        <p class="peek__line" data-peek-line></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════ 05 OUR INITIATIVES ══════════════════════════════════════════════════════════ -->
+  <section class="world section--clear" data-theme="dark" data-stop="world" id="initiatives">
+    <div class="wrap world__inner">
+      <div class="world__copy">
+        <span class="label"><span class="label__no">05</span> Our initiatives</span>
+        <h2 class="h1 world__title" data-reveal="lines">Turning ideas into <span class="serif accent">initiatives.</span></h2>
+        <p class="lead" data-reveal="up">
+          AcademIQ transforms ideas into programmes, conversations and experiences designed to create meaningful academic and social impact.
+        </p>
+        <p class="body" data-reveal="up">
+          From workshops and research initiatives to youth programmes, academic discussions and collaborative projects, our initiatives are built around one principle:<br /><br />
+          <strong style="color:var(--fg);font-size:1.15rem">Create something useful. Connect people who can make it stronger.</strong>
+        </p>
+        <p class="mono dim" data-reveal="up" style="margin-top:0.75rem">
+          *Upcoming Initiatives: New programmes and initiatives are currently being developed.
+        </p>
+        <div data-reveal="up" style="margin-top:1.5rem">
+          <Button href="#apply" label="Explore Initiatives" />
+        </div>
+      </div>
+    </div>
+
+    <Marquee speed={80} class="places">
+      {['Workshops', 'Research Initiatives', 'Youth Programmes', 'Academic Discussions', 'Collaborative Projects', 'Knowledge Sessions', 'Global Dialogues'].map((p) => (
+        <span class="mq__item places__item"><span>{p}</span><i aria-hidden="true">•</i></span>
+      ))}
+    </Marquee>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════ 06 OUR JOURNEY ══════════════════════════════════════════════════════════ -->
   <section class="jour" data-theme="paper" data-journey id="journey">
     <div class="jour__pin" data-journey-pin>
       <header class="wrap jour__head">
         <div class="jour__head-l">
-          <span class="label"><span class="label__no">04</span> Our journey</span>
-          <h2 class="h2" data-reveal="lines">From an idea to a <span class="serif accent">connected ecosystem.</span></h2>
+          <span class="label"><span class="label__no">06</span> Our journey</span>
+          <h2 class="h2" data-reveal="lines">From an idea to a <span class="serif accent">growing ecosystem.</span></h2>
         </div>
         <div class="jour__meter mono" aria-hidden="true">
           <span>Phase</span>
-          <b data-journey-month>00</b>
+          <b data-journey-month>01</b>
           <span>/ 06</span>
         </div>
       </header>
@@ -338,13 +395,13 @@ const map = hubs.map((h) => ({
           <li class="jour__card jour__card--end card" data-phase={phases.length}>
             <header class="jour__card-head mono">
               <span class="jour__no">07</span>
-              <span class="jour__dur">Ongoing</span>
+              <span class="jour__dur">Next Chapter</span>
               <span class="jour__verb">Lead</span>
             </header>
-            <h3 class="jour__name h3">A Borderless Future.</h3>
+            <h3 class="jour__name h3">Growing Globally.</h3>
             <div class="jour__end-body">
-              <p class="lead">Connecting minds, opening pathways, and elevating scholarship across every corner of the globe.</p>
-              <p class="body">With permanent network access, fellow circles, and institutional partnerships that endure.</p>
+              <p class="lead">Building stronger partnerships, expanding programmes and connecting more people across borders.</p>
+              <p class="body">Connecting minds, opening pathways, and elevating scholarship across every corner of the globe.</p>
             </div>
             <Button href="#apply" label="Join our journey" variant="light" />
           </li>
@@ -359,7 +416,7 @@ const map = hubs.map((h) => ({
             </span>
           ))}
           <span class="ruler__seg ruler__seg--end" style={`--from:${acc / 12};--len:${(12 - acc) / 12}`} data-ruler-seg>
-            <em class="mono">Connected</em>
+            <em class="mono">Growing Globally</em>
           </span>
           <i class="ruler__fill" data-journey-fill></i>
           <i class="ruler__dot" data-journey-dot></i>
@@ -371,60 +428,20 @@ const map = hubs.map((h) => ({
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════════════════════ 05 STRATEGIC PILLARS ══════════════════════════════════════════════════════════ -->
-  <section class="dom section" data-theme="dark" id="what-we-do">
-    <div class="wrap">
-      <SectionHead no="05" label="What we do" meta="Six pillars • One ecosystem">
-        <Fragment slot="title">Six pillars.<br /><span class="serif accent">One ecosystem.</span></Fragment>
-        <p class="body" data-reveal="up">
-          From discovering opportunities to developing skills and building meaningful connections, AcademiQ brings
-          different parts of the academic journey into one connected home.
-        </p>
-      </SectionHead>
-
-      <ul class="dom__list" data-domains>
-        {courses.map((c) => (
-          <li class="dom__item" data-reveal="up">
-            <a class="dom__row" href="#apply" data-cursor="view" data-domain data-glyph={c.glyph} data-line={c.line} data-family={c.family}>
-              <span class="dom__no mono">{c.no}</span>
-              <span class="dom__name">{c.name}</span>
-              <span class="dom__stacks mono">
-                {(c.stacks.length ? c.stacks : ['Core Pillar']).slice(0, 4).join(' • ')}
-              </span>
-              <span class="dom__arrow" aria-hidden="true"><Arrow /></span>
-            </a>
-          </li>
-        ))}
-      </ul>
-
-      <div class="dom__more" data-reveal="up">
-        <Button href="#apply" label="Get involved in a pillar" variant="ghost" />
-      </div>
-    </div>
-
-    <div class="peek" data-domain-peek aria-hidden="true">
-      <div class="peek__card">
-        <span class="peek__family mono" data-peek-family>Pillar</span>
-        <span class="peek__glyph" data-peek-glyph>🎓</span>
-        <p class="peek__line" data-peek-line></p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════════════════════════ 06 WHAT WE STAND FOR ══════════════════════════════════════════════════════════ -->
-  <section class="prin" data-theme="dark" data-principles id="principles">
+  <!-- ══════════════════════════════════════════════════════════ 07 WHAT WE STAND FOR ══════════════════════════════════════════════════════════ -->
+  <section class="prin" data-theme="dark" data-principles id="what-we-stand-for">
     <div class="wrap prin__head">
-      <span class="label"><span class="label__no">06</span> What we stand for</span>
-      <h2 class="h2" data-reveal="lines">Three commitments of <span class="serif accent">AcademiQ.</span></h2>
+      <span class="label"><span class="label__no">07</span> What we stand for</span>
+      <h2 class="h2" data-reveal="lines">Six commitments of <span class="serif accent">AcademIQ.</span></h2>
     </div>
 
     <div class="prin__stack">
       {principles.map((p, i) => (
-        <article class="rule-card" data-rule-card data-theme={['paper', 'red', 'dark'][i]} style={`--i:${i}`}>
+        <article class="rule-card" data-rule-card data-theme={['paper', 'red', 'dark', 'paper', 'red', 'dark'][i % 3]} style={`--i:${i}`}>
           <div class="wrap rule-card__inner">
             <header class="rule-card__top mono">
-              <span>Principle {p.no}</span>
-              <span>{['Multiplied', 'Rigorous', 'Global'][i]}</span>
+              <span>Commitment {p.no}</span>
+              <span>{p.badge}</span>
             </header>
             <h3 class="rule-card__title">{p.title}</h3>
             <div class="rule-card__foot">
@@ -437,60 +454,141 @@ const map = hubs.map((h) => ({
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════════════════════ 07 GLOBAL REACH ══════════════════════════════════════════════════════════ -->
-  <section class="world section--clear" data-theme="dark" data-stop="world" id="world">
-    <div class="wrap world__inner">
-      <div class="world__copy">
-        <span class="label"><span class="label__no">07</span> Global network</span>
-        <h2 class="h1 world__title" data-reveal="lines">From South Asia.<br />To <span class="serif accent">the world.</span></h2>
-        <p class="lead" data-reveal="up">
-          New Delhi, wayand, Bengaluru, London, Oxford, Cambridge, Boston, Singapore — connecting researchers, scholars,
-          and students across more than 30 countries and 120 institutions worldwide.
+  <!-- ══════════════════════════════════════════════════════════ 08 MEET THE FOUNDERS ══════════════════════════════════════════════════════════ -->
+  <section class="note section" data-theme="dark" id="founders">
+    <div class="wrap note__grid">
+      <div class="note__label">
+        <span class="label"><span class="label__no">08</span> Meet the founders</span>
+      </div>
+      <blockquote class="note__quote">
+        <p data-reveal="lines">
+          Built by people who believe knowledge shared is <span class="serif accent">knowledge multiplied.</span>
         </p>
-        <div data-reveal="up">
-          <Button href="#apply" label="Connect with global chapters" />
+      </blockquote>
+      <div class="note__foot" data-reveal="up">
+        <div>
+          <p class="h4">The AcademiQ Team</p>
+          <p class="body" style="margin-top:0.5rem;color:var(--fg-2)">
+            AcademIQ is being built by people who believe that education becomes more powerful when knowledge is shared and opportunities are opened for others. Our founders bring together different perspectives, experiences and ambitions with one common goal: To build an academic ecosystem that creates meaningful possibilities for the next generation.
+          </p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:0.75rem;margin-top:1.25rem">
+            {teamDivisions.map((t) => (
+              <div style="padding:0.75rem;border:1px solid var(--rule);background:rgba(255,255,255,0.03);border-radius:6px">
+                <strong class="mono accent" style="display:block;font-size:0.85rem">{t.role}</strong>
+                <span class="small" style="color:var(--fg-2);font-size:0.75rem">{t.desc}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div style="align-self:start">
+          <a class="note__mail" href={`mailto:${contacts.ceo.email}`} data-copy={contacts.ceo.email} data-copy-done="Email copied" data-cursor="copy">
+            <span>{contacts.ceo.email}</span>
+            <span class="orb" aria-hidden="true"><Arrow /></span>
+          </a>
+          <p class="small" style="margin-top:0.75rem">We read every message personally and respond to scholars and partners.</p>
         </div>
       </div>
     </div>
-
-    <Marquee speed={80} class="places">
-      {placeNames.map((p) => (
-        <span class="mq__item places__item"><span>{p}</span><i aria-hidden="true">•</i></span>
-      ))}
-    </Marquee>
   </section>
 
-  <!-- ══════════════════════════════════════════════════════════ 08 COMMUNITY ══════════════════════════════════════════════════════════ -->
+  <!-- ══════════════════════════════════════════════════════════ 09 OPPORTUNITIES ══════════════════════════════════════════════════════════ -->
+  <section class="section" data-theme="paper" id="opportunities" style="border-top:1px solid var(--rule);padding:var(--section) 0">
+    <div class="wrap">
+      <SectionHead no="09" label="Opportunities" meta="Curating &amp; Verifying · Coming Soon">
+        <Fragment slot="title">Discover your next <span class="serif accent">opportunity.</span></Fragment>
+        <p class="body" data-reveal="up">
+          The right opportunity can change the direction of an academic journey. AcademiQ brings together opportunities from across the academic ecosystem and makes them easier to discover.
+        </p>
+      </SectionHead>
+
+      <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin:2rem 0" data-reveal="up">
+        {opportunityCategories.map((cat, i) => (
+          <span class="tag" style={i === 0 ? "background:var(--accent);color:#fff" : ""}>{cat}</span>
+        ))}
+      </div>
+
+      <div class="card" style="padding:clamp(1.5rem, 2.5vw, 3rem);background:var(--paper-2);border:1px solid var(--rule);border-radius:12px;margin-top:1.5rem" data-reveal="up">
+        <div style="max-width:48rem">
+          <span class="mono accent" style="font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase">Curating &amp; Verifying</span>
+          <h3 class="h3" style="margin:0.5rem 0 1rem">Coming Soon</h3>
+          <p class="body" style="color:var(--fg-2);line-height:1.6">
+            Our team is currently curating and verifying opportunities before publishing them. We believe quality matters more than quantity. Every opportunity should provide clear and useful information so that students and researchers can make informed decisions.
+          </p>
+          <div style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;margin-top:1.5rem">
+            <Button href="#apply" label="Join AcademiQ" />
+            <span class="small mono" style="color:var(--fg-3)">Be among the first to know when new opportunities go live.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════ 10 EVENTS ══════════════════════════════════════════════════════════ -->
+  <section class="section" data-theme="dark" id="events" style="border-top:1px solid var(--rule);padding:var(--section) 0">
+    <div class="wrap">
+      <SectionHead no="10" label="Events" meta="Talks · Workshops · Discussions">
+        <Fragment slot="title">Ideas become <span class="serif accent">conversations.</span></Fragment>
+        <p class="body" data-reveal="up">
+          Great ideas grow when people come together. AcademiQ brings students, researchers, scholars, mentors and experts together through talks, workshops, discussions and community sessions.
+        </p>
+      </SectionHead>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:var(--gap);margin-top:2.5rem" data-reveal="up">
+        <div class="card" style="padding:2rem;background:rgba(255,255,255,0.02);border:1px solid var(--rule)">
+          <span class="mono accent" style="font-size:0.8rem">UPCOMING SESSIONS</span>
+          <h3 class="h4" style="margin:0.75rem 0">Upcoming Events</h3>
+          <p class="small" style="color:var(--fg-2);line-height:1.6">
+            New conversations are being planned.
+          </p>
+          <div style="margin-top:1.5rem">
+            <Button href="#apply" label="Explore Events" variant="ghost" size="sm" />
+          </div>
+        </div>
+
+        <div class="card" style="padding:2rem;background:rgba(255,255,255,0.02);border:1px solid var(--rule)">
+          <span class="mono dim" style="font-size:0.8rem">COMMUNITY ARCHIVE</span>
+          <h3 class="h4" style="margin:0.75rem 0">Past Events</h3>
+          <p class="small" style="color:var(--fg-2);line-height:1.6">
+            Explore conversations and activities from the AcademiQ community.
+          </p>
+          <div style="margin-top:1.5rem">
+            <Button href="#apply" label="View Past Events" variant="ghost" size="sm" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════ 11 COMMUNITY ══════════════════════════════════════════════════════════ -->
   <section class="alum section" data-theme="dark" id="community">
     <div class="wrap">
-      <SectionHead no="08" label="Scholars & Community" meta="Drag to explore">
-        <Fragment slot="title">Curious minds carrying the work <span class="serif accent">forward.</span></Fragment>
+      <SectionHead no="11" label="Community" meta="Be part of the community">
+        <Fragment slot="title">A growing circle of curious, <span class="serif accent">ambitious minds.</span></Fragment>
         <p class="body" data-reveal="up">
-          Students, young researchers, doctoral scholars, and mentors collaborating across borders to unlock knowledge and opportunity.
+          AcademIQ is its people. A growing circle of curious, ambitious minds learning from one another, sharing knowledge and creating opportunities together.
         </p>
       </SectionHead>
     </div>
 
     <div class="rail" data-rail data-cursor="drag">
       <ul class="rail__track" data-rail-track>
-        {rail.map((a, i) => (
+        {networkGroups.map((g, i) => (
           <li class="person card" data-person>
             <header class="person__top">
-              <span class="person__mono" aria-hidden="true">{initials(a.name)}</span>
-              <span class="mono dimmer">{String(i + 1).padStart(2, '0')}</span>
+              <span class="person__mono" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <span class="mono dimmer">Community</span>
             </header>
-            <p class="person__lpa"><b>{a.track}</b><span class="mono"> • AcademiQ</span></p>
+            <p class="person__lpa"><b>{g.role}</b><span class="mono"> • AcademiQ</span></p>
             <footer class="person__foot">
-              <h3 class="h4">{a.name}</h3>
-              <p class="small">{a.company}</p>
-              <span class="tag">{a.stack}</span>
+              <h3 class="h4">{g.role}</h3>
+              <p class="small">{g.desc}</p>
             </footer>
           </li>
         ))}
         <li class="person person--more" data-person>
           <a href="#apply" data-cursor="view">
-            <span class="mono">+ 10,000 more scholars</span>
-            <span class="h3">Join the community</span>
+            <span class="mono">Your people are out there</span>
+            <span class="h3">Join AcademiQ</span>
             <span class="orb"><Arrow /></span>
           </a>
         </li>
@@ -498,97 +596,76 @@ const map = hubs.map((h) => ({
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════════════════════ 09 HUBS & CHAPTERS ══════════════════════════════════════════════════════════ -->
-  <section class="hubs section" data-theme="paper" data-hubs id="hubs">
+  <!-- ══════════════════════════════════════════════════════════ 12 COLLABORATE & PARTNERS ══════════════════════════════════════════════════════════ -->
+  <section class="hubs section" data-theme="paper" data-hubs id="collaborate">
     <div class="wrap">
-      <SectionHead no="09" label="Global chapters" meta="6 locations • and online everywhere">
-        <Fragment slot="title">Connect locally.<br />Engage <span class="serif accent">globally.</span></Fragment>
+      <SectionHead no="12" label="Collaborate" meta="Let's build something together">
+        <Fragment slot="title">Let's build <span class="serif accent">something together.</span></Fragment>
         <p class="body" data-reveal="up">
-          AcademiQ operates chapter nodes across major academic and research hubs — and online for everyone else worldwide.
+          AcademIQ grows through meaningful collaboration. Whether you represent a university, research group, educational organisation, youth organisation or your own professional expertise, there is a way to contribute. We welcome collaborations that create genuine educational, research and social value.
         </p>
       </SectionHead>
 
-      <div class="hubs__grid">
-        <ul class="hubs__list">
-          {map.map((h, i) => (
-            <li class="hub" data-hub={i} data-reveal="up">
-              <a class="hub__row" href="#apply" data-cursor="open" data-cursor-text="Node">
-                <span class="hub__code mono">{h.code}</span>
-                <span class="hub__city">{h.city}</span>
-                <span class="hub__tag mono">{h.tag}</span>
-                <span class="hub__addr">{h.address}</span>
-              </a>
-            </li>
-          ))}
-          <li class="hub hub--remote" data-reveal="up">
-            <div class="hub__row">
-              <span class="hub__code mono">WWW</span>
-              <span class="hub__city">Online</span>
-              <span class="hub__tag mono">Global</span>
-              <span class="hub__addr">Wherever you and your research are.</span>
-            </div>
-          </li>
-        </ul>
-
-        <figure class="atlas" data-reveal="scale" aria-label="Relative positions of AcademiQ chapter hubs">
-          <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" data-atlas>
-            <g class="atlas__grid">
-              {Array.from({ length: 11 }).map((_, i) => <line x1={i * 10} y1="0" x2={i * 10} y2="100" />)}
-              {Array.from({ length: 11 }).map((_, i) => <line x1="0" y1={i * 10} x2="100" y2={i * 10} />)}
-            </g>
-            <g class="atlas__links">
-              {map.slice(1).map((h) => <line x1={map[0].px} y1={map[0].py} x2={h.px} y2={h.py} data-atlas-link />)}
-            </g>
-            {map.map((h, i) => (
-              <g class="atlas__node" data-atlas-node={i} transform={`translate(${h.px} ${h.py})`}>
-                <circle class="atlas__pulse" r="5" />
-                <circle class="atlas__dot" r={i === 0 ? 1.7 : 1.2} />
-                <text x="3.2" y="1.1">{h.code}</text>
-              </g>
-            ))}
-          </svg>
-          <figcaption class="mono">
-            <span>N ↑</span>
-            <span>{map[0].lat.toFixed(2)}° N • {map[0].lon.toFixed(2)}° E</span>
-          </figcaption>
-        </figure>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:var(--gap);margin-top:2.5rem" data-reveal="up">
+        {collaborationCategories.map((c) => (
+          <div class="card" style="padding:1.5rem;background:var(--paper-2);border:1px solid var(--rule)">
+            <h3 class="h4" style="margin-bottom:0.5rem">{c.name}</h3>
+            <p class="small" style="color:var(--fg-2);line-height:1.5">{c.desc}</p>
+          </div>
+        ))}
       </div>
-    </div>
-  </section>
 
-  <!-- ══════════════════════════════════════════════════════════ 10 FOUNDERS & TEAM ══════════════════════════════════════════════════════════ -->
-  <section class="note section" data-theme="dark" id="founders">
-    <div class="wrap note__grid">
-      <div class="note__label">
-        <span class="label"><span class="label__no">10</span> The Team</span>
-      </div>
-      <blockquote class="note__quote">
-        <p data-reveal="lines">
-          Built by people who believe knowledge shared is <span class="serif accent">knowledge multiplied.</span> Got an idea for research or institutional collaboration? Write straight to the team.
-        </p>
-      </blockquote>
-      <div class="note__foot" data-reveal="up">
-        <div>
-          <p class="h4">Hisham Abdulla &amp; Founders</p>
-          <p class="mono dim">Academic Council, AcademiQ</p>
+      <div style="margin-top:3.5rem;padding-top:2.5rem;border-top:1px solid var(--rule)" data-reveal="up" id="partners">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem">
+          <div>
+            <span class="label"><span class="label__no">12b</span> Partners</span>
+            <h3 class="h3" style="margin-top:0.5rem">Built through collaboration.</h3>
+            <p class="body" style="color:var(--fg-2);margin-top:0.5rem;max-width:44rem">
+              AcademIQ believes meaningful change rarely happens alone. Our partnerships bring together institutions, organisations, researchers, educators and communities working toward shared goals.
+            </p>
+            <p class="small mono" style="color:var(--fg-3);margin-top:0.5rem">
+              *Verified partners and collaborators will be featured here as collaborations are formally established.
+            </p>
+          </div>
+          <Button href={`mailto:${contacts.official.email}`} label="Start a conversation" />
         </div>
-        <a class="note__mail" href={`mailto:${contacts.ceo.email}`} data-copy={contacts.ceo.email} data-copy-done="Email copied" data-cursor="copy">
-          <span>{contacts.ceo.email}</span>
-          <span class="orb" aria-hidden="true"><Arrow /></span>
-        </a>
-        <p class="small">We read every message personally and respond to scholars and partners.</p>
       </div>
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════════════════════ 11 JOIN ACADEMIQ ══════════════════════════════════════════════════════════ -->
+  <!-- ══════════════════════════════════════════════════════════ 13 RESOURCES ══════════════════════════════════════════════════════════ -->
+  <section class="section" data-theme="dark" id="resources" style="border-top:1px solid var(--rule);padding:var(--section) 0">
+    <div class="wrap">
+      <SectionHead no="13" label="Resources" meta="Coming Soon · Quality resources">
+        <Fragment slot="title">Knowledge you <span class="serif accent">can use.</span></Fragment>
+        <p class="body" data-reveal="up">
+          Good academic work begins with good resources. AcademiQ is building a growing library of practical resources for students, researchers and academics. Every resource will be reviewed before publication.
+        </p>
+      </SectionHead>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:var(--gap);margin-top:2.5rem" data-reveal="up">
+        {resourceCategories.map((r) => (
+          <div class="card" style="padding:1.5rem;background:rgba(255,255,255,0.02);border:1px solid var(--rule)">
+            <span class="mono accent" style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase">COMING SOON</span>
+            <h3 class="h4" style="margin:0.5rem 0">{r.name}</h3>
+            <p class="small" style="color:var(--fg-2);line-height:1.5">{r.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════ 14 YOUR MOVE ══════════════════════════════════════════════════════════ -->
   <section class="join section" data-theme="red" id="apply">
     <div class="wrap join__grid">
       <header class="join__head">
-        <span class="label label--plain"><span class="dot" style="background:#fff"></span> Your turn</span>
+        <span class="label label--plain"><span class="dot" style="background:#fff"></span> 14 Your move</span>
         <h2 class="display join__title" data-reveal="chars">Ready to<br />join?</h2>
         <p class="lead" data-reveal="up">
-          Join a growing network of students, researchers, scholars and mentors. Tell us who you are, and let's explore opportunities together.
+          Your next opportunity could start here. You may be looking for a university. A scholarship. A research opportunity. A mentor. A community. Or simply a place to begin. Whatever your next step is, AcademiQ is here to help you find the people, knowledge and opportunities that can move you forward.
+        </p>
+        <p class="mono" style="margin-top:1rem;color:rgba(255,255,255,0.9);font-size:0.95rem">
+          Learn. Connect. Discover. Contribute.
         </p>
       </header>
 

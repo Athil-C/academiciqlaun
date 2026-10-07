@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Single source of truth for every number, contact and claim on the site.
  * Updated for AcademiQ — Connecting Minds. Creating Opportunities.
  */
@@ -35,13 +35,44 @@ export const stats = {
   freeMaterialLakh: 10,
 };
 
+export const topics = [
+  'Education',
+  'Research',
+  'Opportunities',
+  'International Affairs',
+  'Youth',
+];
+
 export const nav = [
   { label: 'Who We Are', href: '#who-we-are', note: 'An academic ecosystem' },
   { label: 'What We Do', href: '#what-we-do', note: 'Six strategic pillars' },
-  { label: 'Our Reach', href: '#reach', note: '10,000+ learners & scholars' },
-  { label: 'Our Journey', href: '#journey', note: 'Genesis to global reach' },
+  { label: 'Our Reach', href: '#reach', note: 'A network in motion' },
+  { label: 'Our Story', href: '#story', note: 'Knowledge & opportunity' },
+  { label: 'Our Journey', href: '#journey', note: 'From an idea to an ecosystem' },
   { label: 'Founders', href: '#founders', note: 'The team behind the work' },
-  { label: 'Events', href: '#events', note: 'Symposiums & dialogues' },
+  { label: 'Opportunities', href: '#opportunities', note: 'Discover possibilities' },
+  { label: 'Events', href: '#events', note: 'Ideas become conversations' },
+];
+
+export const footerNav = [
+  { label: 'Who We Are', href: '#who-we-are' },
+  { label: 'What We Do', href: '#what-we-do' },
+  { label: 'Our Journey', href: '#journey' },
+  { label: 'Founders', href: '#founders' },
+  { label: 'Opportunities', href: '#opportunities' },
+  { label: 'Events', href: '#events' },
+  { label: 'Resources', href: '#resources' },
+  { label: 'Join AcademiQ', href: '#apply' },
+  { label: 'Contact', href: 'mailto:contact@academiq.org' },
+];
+
+export const footerConnect = [
+  { label: 'Students', href: '#community' },
+  { label: 'Researchers', href: '#community' },
+  { label: 'Academics', href: '#community' },
+  { label: 'Mentors', href: '#community' },
+  { label: 'Institutions', href: '#collaborate' },
+  { label: 'Partners', href: '#partners' },
 ];
 
 export const contacts = {

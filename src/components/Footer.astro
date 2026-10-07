@@ -1,6 +1,6 @@
 ---
 import Button from './Button.astro';
-import { nav, contacts, hubs, socials, external, partners, brand } from '../data/site.js';
+import { footerNav, footerConnect, contacts, brand, topics } from '../data/site.js';
 const year = new Date().getFullYear();
 const { lead = 'Your next opportunity could start here.' } = Astro.props;
 ---
@@ -11,11 +11,14 @@ const { lead = 'Your next opportunity could start here.' } = Astro.props;
         <span class="label">Your move</span>
         <h2 class="h3" data-reveal="lines">{lead}</h2>
         <p class="body">
-          Join a growing network of students, researchers, scholars and mentors learning, collaborating and creating opportunities together.
+          You may be looking for a university. A scholarship. A research opportunity. A mentor. A community. Or simply a place to begin. Whatever your next step is, AcademiQ is here to help you find the people, knowledge and opportunities that can move you forward.
         </p>
-        <div style="display:flex;flex-wrap:wrap;gap:.75rem">
-          <Button href="#apply" label="Join AcademiQ " />
-          <Button href={`mailto:${contacts.official.email}`} label="Start a conversation" variant="ghost" />
+        <p class="mono accent" style="margin-top:0.5rem;font-size:0.9rem">
+          Learn. Connect. Discover. Contribute.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.25rem">
+          <Button href="#apply" label="Join AcademiQ" />
+          <Button href="#opportunities" label="Explore Opportunities" variant="ghost" />
         </div>
       </div>
 
@@ -23,56 +26,41 @@ const { lead = 'Your next opportunity could start here.' } = Astro.props;
         <div class="foot__col">
           <h3 class="mono">Navigate</h3>
           <ul>
-            <li><a class="link link--quiet" href="#who-we-are">Who We Are</a></li>
-            <li><a class="link link--quiet" href="#what-we-do">What We Do</a></li>
-            <li><a class="link link--quiet" href="#reach">Our Reach</a></li>
-            <li><a class="link link--quiet" href="#journey">Our Journey</a></li>
-            <li><a class="link link--quiet" href="#founders">Founders</a></li>
-            <li><a class="link link--quiet" href="#events">Events</a></li>
-            <li><a class="link link--quiet" href="#apply">Join Us</a></li>
+            {footerNav.map((item) => (
+              <li><a class="link link--quiet" href={item.href}>{item.label}</a></li>
+            ))}
           </ul>
         </div>
 
         <div class="foot__col">
           <h3 class="mono">Connect</h3>
           <ul>
-            <li><a class="link link--quiet" href={`tel:${contacts.admissions.tel}`}>{contacts.admissions.phone}</a></li>
-            <li><a class="link link--quiet" href={`mailto:${contacts.admissions.email}`}>{contacts.admissions.email}</a></li>
-          </ul>
-          <h3 class="mono" style="margin-top:2rem">Collaborate</h3>
-          <ul>
-            <li><a class="link link--quiet" href={`mailto:${contacts.placements.email}`}>{contacts.placements.email}</a></li>
-          </ul>
-        </div>
-
-        <div class="foot__col">
-          <h3 class="mono">Ecosystem</h3>
-          <ul>
-            <li><a class="link link--quiet" href="#what-we-do">Higher Education</a></li>
-            <li><a class="link link--quiet" href="#what-we-do">Research Cohorts</a></li>
-            <li><a class="link link--quiet" href="#what-we-do">Writing Labs</a></li>
-            <li><a class="link link--quiet" href="#what-we-do">Opportunities</a></li>
-            {socials.map((s) => (
-              <li><a class="link link--quiet" href={s.href} target="_blank" rel="noopener">{s.label}</a></li>
+            {footerConnect.map((item) => (
+              <li><a class="link link--quiet" href={item.href}>{item.label}</a></li>
             ))}
           </ul>
         </div>
 
-        <div class="foot__col foot__col--wide">
-          <h3 class="mono">Global Chapters</h3>
-          <p>{hubs.map((h) => h.city).join(' • ')} • Online Everywhere</p>
+        <div class="foot__col">
+          <h3 class="mono">AcademIQ</h3>
+          <p class="small" style="line-height:1.6;color:var(--fg-2)">
+            Building a connected academic ecosystem for knowledge, opportunity and collaboration.
+          </p>
+          <div style="margin-top:1.5rem">
+            <h4 class="mono" style="font-size:0.75rem;text-transform:uppercase;color:var(--fg-3);margin-bottom:0.5rem">Focus Areas</h4>
+            <p class="small" style="color:var(--fg-2);line-height:1.5">
+              {topics.join(' · ')}
+            </p>
+          </div>
         </div>
 
-        <div class="foot__col">
-          <h3 class="mono">Motto</h3>
-          <p>Connecting Minds.<br />Creating Opportunities.</p>
+        <div class="foot__col foot__col--wide">
+          <h3 class="mono">Connecting Minds. Creating Opportunities.</h3>
+          <p class="small" style="color:var(--fg-2);line-height:1.6">
+            AcademIQ is a growing global academic ecosystem connecting students, researchers, scholars, mentors and institutions through education, research, mentorship and meaningful opportunities.
+          </p>
         </div>
       </div>
-    </div>
-
-    <div class="foot__partners mono">
-      <span>Collaborating with</span>
-      {partners.map((p) => <span class="tag">{p}</span>)}
     </div>
   </div>
 
@@ -85,11 +73,12 @@ const { lead = 'Your next opportunity could start here.' } = Astro.props;
 
   <div class="wrap">
     <div class="foot__base mono">
-      <span>© {year} {brand.legal}</span>
+      <span>© 2026 AcademiQ. All rights reserved.</span>
       <span class="foot__clock">Global <b data-clock>--:--:--</b> UTC</span>
       <ul>
-        <li><a href="#privacy">Privacy</a></li>
-        <li><a href="#terms">Terms</a></li>
+        <li><a href="#privacy">Privacy Policy</a></li>
+        <li><a href="#terms">Terms of Use</a></li>
+        <li><a href="#guidelines">Community Guidelines</a></li>
       </ul>
       <a class="totop" href="#top" data-totop data-cursor="link">
         Back to top

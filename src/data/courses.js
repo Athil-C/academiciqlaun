@@ -1,6 +1,6 @@
-﻿/**
+/**
  * The Six Strategic Pillars of AcademiQ.
- * From discovering opportunities to developing capability and building global networks.
+ * From learning and research to opportunities, mentorship and global engagement.
  */
 export const courses = [
   {
@@ -10,50 +10,50 @@ export const courses = [
     short: 'Higher Ed',
     glyph: '🎓',
     family: 'Navigate',
-    line: 'Guidance and pathways into universities, scholarships and advanced study.',
+    line: 'Find the pathway that fits your ambitions.',
     pitch:
-      'Connecting ambitious students to leading global institutions, funding avenues, graduate admissions guidance, and scholarship opportunities worldwide.',
-    stacks: ['Admissions', 'Scholarships', 'Postgrad', 'Fellowships'],
-    roles: ['Graduate Scholar', 'Fellowship Candidate', 'University Scholar'],
+      'We help students explore universities, scholarships, academic programmes and pathways to advanced study — both locally and internationally.',
+    stacks: ['Universities', 'Scholarships', 'Postgraduate', 'Study Abroad'],
+    roles: ['University Candidate', 'Scholarship Applicant', 'Graduate Scholar'],
   },
   {
     id: 'research',
     no: '02',
-    name: 'Research Cohorts',
+    name: 'Research',
     short: 'Research',
     glyph: '🔬',
-    family: 'Discover',
-    line: 'Forums, networks and programmes that help young researchers ask better questions.',
+    family: 'Inquire',
+    line: 'Ask better questions. Build better knowledge.',
     pitch:
-      'Interdisciplinary research pods, collaborative labs, and scientific forums focused on methodology, literature reviews, and high-impact publications.',
-    stacks: ['Methodology', 'Peer Review', 'Working Groups', 'Data Science'],
-    roles: ['Research Associate', 'Doctoral Scholar', 'Principal Investigator'],
+      'AcademIQ encourages young researchers to explore meaningful questions, connect with research communities and develop the skills required for rigorous academic work.',
+    stacks: ['Research Methodology', 'Working Groups', 'Peer Review', 'Publishing'],
+    roles: ['Young Researcher', 'Doctoral Scholar', 'Research Fellow'],
   },
   {
     id: 'academic-development',
     no: '03',
     name: 'Academic Development',
-    short: 'Development',
+    short: 'Skills',
     glyph: '✍️',
     family: 'Build',
-    line: 'Writing, critical thinking and research-skills programmes that build serious capability.',
+    line: 'Build skills that last beyond the classroom.',
     pitch:
-      'Intensive clinics coaching emerging scholars in scientific manuscript drafting, critical argumentation, citation rigor, and academic discourse.',
-    stacks: ['Scholarly Writing', 'Critical Inquiry', 'Publishing Labs', 'Presentations'],
-    roles: ['Academic Writer', 'Peer Reviewer', 'Research Scholar'],
+      'From academic writing and critical thinking to research methodology and communication, our programmes are designed to help learners develop practical academic capabilities.',
+    stacks: ['Academic Writing', 'Critical Thinking', 'Research Methods', 'Communication'],
+    roles: ['Academic Writer', 'Methodology Scholar', 'Critical Inquirer'],
   },
   {
     id: 'opportunities',
     no: '04',
-    name: 'Opportunities & Grants',
+    name: 'Opportunities',
     short: 'Opportunities',
     glyph: '🧭',
-    family: 'Access',
-    line: 'Curated scholarships, fellowships, conferences and calls for papers.',
+    family: 'Discover',
+    line: 'Discover possibilities before they pass you by.',
     pitch:
-      'A single curated portal for funded international conferences, grant opportunities, calls for papers, exchange programmes, and research stipends.',
-    stacks: ['Grants', 'Conferences', 'Calls for Papers', 'Funded Residencies'],
-    roles: ['Conference Delegate', 'Grant Recipient', 'Exchange Fellow'],
+      'We curate scholarships, fellowships, internships, conferences, competitions, calls for papers and academic programmes to make meaningful opportunities easier to discover.',
+    stacks: ['Scholarships', 'Fellowships', 'Conferences', 'Calls for Papers'],
+    roles: ['Fellowship Candidate', 'Conference Delegate', 'Opportunity Seeker'],
   },
   {
     id: 'mentorship',
@@ -62,11 +62,11 @@ export const courses = [
     short: 'Mentorship',
     glyph: '🤝',
     family: 'Connect',
-    line: 'Meaningful connections between students, researchers, mentors and institutions.',
+    line: 'Learn from people. Grow with people.',
     pitch:
-      'One-on-one mentorship pairing with faculty, postdocs, and senior scholars across borders to guide research careers and institutional applications.',
-    stacks: ['Faculty Mentors', 'Global Circles', 'Peer Mentoring', 'Cross-Border Pods'],
-    roles: ['Mentee Scholar', 'Faculty Mentor', 'Research Fellow'],
+      'Meaningful guidance can change an academic journey. AcademIQ connects students and researchers with mentors, peers and professionals who can share knowledge, experience and perspective.',
+    stacks: ['Mentors', 'Peer Circles', 'Academic Networks', 'Guidance'],
+    roles: ['Mentee Student', 'Research Peer', 'Academic Mentor'],
   },
   {
     id: 'global-engagement',
@@ -75,33 +75,29 @@ export const courses = [
     short: 'Global Affairs',
     glyph: '🌐',
     family: 'Engage',
-    line: 'Dialogue on international affairs and youth development — connecting AcademiQ to the world.',
+    line: 'Think beyond borders.',
     pitch:
-      'Youth diplomacy forums, international policy roundtables, and cross-cultural academic exchanges shaping the next generation of global thought leaders.',
-    stacks: ['International Relations', 'Youth Diplomacy', 'Policy Dialogues', 'Global Forums'],
-    roles: ['Policy Fellow', 'Youth Delegate', 'Global Academic Ambassador'],
+      'AcademIQ creates space for conversations around international affairs, youth development, education and global challenges — connecting young people with a wider world.',
+    stacks: ['International Affairs', 'Youth Development', 'Education', 'Global Dialogues'],
+    roles: ['Global Delegate', 'Youth Ambassador', 'International Scholar'],
   },
 ];
 
-export const families = ['All', 'Navigate', 'Discover', 'Build', 'Access', 'Connect', 'Engage'];
+export const families = ['All', 'Navigate', 'Inquire', 'Build', 'Discover', 'Connect', 'Engage'];
 
 export const placedStacks = [
-  'Admissions',
+  'Universities',
   'Scholarships',
-  'Postgrad',
-  'Fellowships',
-  'Methodology',
-  'Peer Review',
+  'Research Methodology',
   'Working Groups',
-  'Data Science',
-  'Scholarly Writing',
-  'Critical Inquiry',
-  'Publishing Labs',
-  'Grants',
+  'Academic Writing',
+  'Critical Thinking',
+  'Fellowships',
   'Conferences',
   'Calls for Papers',
-  'Faculty Mentors',
-  'Global Circles',
-  'International Relations',
-  'Youth Diplomacy',
+  'Mentors',
+  'Peer Circles',
+  'International Affairs',
+  'Youth Development',
+  'Global Dialogues',
 ];
