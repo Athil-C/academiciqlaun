@@ -81,9 +81,9 @@ function journey() {
     const m = lerp(marks[k], marks[k + 1], clamp(c - k, 0, 1));
     const r = m / 12;
     gsap.set(fill, { scaleX: r });
-    gsap.set(dot, { x: r * ruler.offsetWidth });
-    month.textContent = String(Math.floor(m + 0.02)).padStart(2, '0');
     const now = Math.round(c);
+    const displayPhase = clamp(Math.min(now + 1, 6), 1, 6);
+    month.textContent = String(displayPhase).padStart(2, '0');
     if (now !== current) {
       current = now;
       cards.forEach((el, i) => el.classList.toggle('is-now', i === now));
