@@ -1,0 +1,83 @@
+﻿---
+import Logo from './Logo.astro';
+import Button from './Button.astro';
+import { nav, contacts, hubs, socials } from '../data/site.js';
+const path = Astro.url.pathname.replace(/\/?$/, '/');
+const isCurrent = (href) => path === href;
+---
+<header class="nav" data-nav>
+  <div class="wrap nav__inner">
+    <Logo />
+
+    <nav class="nav__links" aria-label="Primary">
+      {nav.map((item) => (
+        <a class="nav__link" href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined} data-cursor="link">
+          <span class="roll" data-text={item.label}><span>{item.label}</span></span>
+        </a>
+      ))}
+    </nav>
+
+    <div class="nav__actions">
+      <Button href="#apply" label="Join AcademiQ ↗" size="sm" class="nav__apply" />
+      <button class="burger" type="button" aria-expanded="false" aria-controls="menu" data-burger data-cursor="link">
+        <span class="burger__text" aria-hidden="true"><span>Menu</span><span>Close</span></span>
+        <span class="burger__lines" aria-hidden="true"><i></i><i></i></span>
+        <span class="sr-only">Toggle menu</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu" data-menu aria-hidden="true" data-lenis-prevent>
+  <div class="menu__bg" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
+  <div class="wrap menu__body">
+    <nav class="menu__list" aria-label="All pages">
+      <a class="menu__item" href="/" aria-current={isCurrent('/') ? 'page' : undefined} data-menu-in>
+        <span class="menu__no">00</span>
+        <span class="menu__name">Home</span>
+        <span class="menu__note">Connecting Minds. Creating Opportunities.</span>
+      </a>
+      {nav.map((item, i) => (
+        <a class="menu__item" href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined} data-menu-in>
+          <span class="menu__no">{String(i + 1).padStart(2, '0')}</span>
+          <span class="menu__name">{item.label}</span>
+          <span class="menu__note">{item.note}</span>
+        </a>
+      ))}
+      <a class="menu__item" href="#apply" aria-current={isCurrent('#apply') ? 'page' : undefined} data-menu-in>
+        <span class="menu__no">{String(nav.length + 1).padStart(2, '0')}</span>
+        <span class="menu__name accent">Join</span>
+        <span class="menu__note">Connect with the ecosystem</span>
+      </a>
+    </nav>
+
+    <div class="menu__side">
+      <div class="menu__block" data-menu-in>
+        <h3 class="mono">Academic Affairs</h3>
+        <a class="link link--quiet" href={`tel:${contacts.admissions.tel}`}>{contacts.admissions.phone}</a>
+        <a class="link link--quiet" href={`mailto:${contacts.admissions.email}`}>{contacts.admissions.email}</a>
+      </div>
+      <div class="menu__block" data-menu-in>
+        <h3 class="mono">Global Chapters</h3>
+        <p>{hubs.map((h) => h.city).join(' • ')}</p>
+        <p class="dim">and online, connecting scholars worldwide.</p>
+      </div>
+      <div class="menu__block" data-menu-in>
+        <h3 class="mono">Focus Areas</h3>
+        <p>Education • Research • Opportunities • Youth</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="menu__foot mono" data-menu-in>
+      <ul>
+        {socials.map((s) => (
+          <li><a class="link link--quiet" href={s.href} target="_blank" rel="noopener">{s.label}</a></li>
+        ))}
+      </ul>
+      <span>Connecting Minds. Creating Opportunities.</span>
+    </div>
+  </div>
+</div>

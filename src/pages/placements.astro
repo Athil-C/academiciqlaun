@@ -1,0 +1,358 @@
+﻿---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+import Arrow from '../components/Arrow.astro';
+import Marquee from '../components/Marquee.astro';
+import SectionHead from '../components/SectionHead.astro';
+import '../styles/blocks.css';
+import '../styles/pages/inner.css';
+import '../styles/pages/placements.css';
+
+import { stats, external, inr } from '../data/site.js';
+import { alumni, stories, qualifications, destinations, regions, labelled, initials } from '../data/alumni.js';
+import { hiringPartners } from '../data/hire.js';
+
+const tracks = ['All', ...new Set(alumni.map((a) => a.track))];
+const count = (t) => (t === 'All' ? alumni.length : alumni.filter((a) => a.track === t).length);
+const nonItCount = Math.floor((stats.placed * stats.nonIt) / 100);
+const itCount = stats.placed - nonItCount;
+
+// strip plot: one dot per published package, stacked where they coincide
+const MAX = 36;
+const paid = alumni.filter((a) => a.lpa).sort((a, b) => a.lpa - b.lpa);
+const seen = {};
+const plot = paid.map((a) => {
+  const bin = Math.round(a.lpa);
+  seen[bin] = (seen[bin] || 0) + 1;
+  return { ...a, x: (a.lpa / MAX) * 100, level: seen[bin] - 1 };
+});
+const levels = Math.max(...plot.map((p) => p.level)) + 1;
+const ticks = [0, 5, 10, 15, 20, 25, 30, 35];
+
+const third = Math.ceil(hiringPartners.length / 3);
+const rows = [hiringPartners.slice(0, third), hiringPartners.slice(third, third * 2), hiringPartners.slice(third * 2)];
+const pins = labelled.map((n) => ({ name: n, index: destinations.findIndex((d) => d.name === n) })).filter((p) => p.index >= 0);
+---
+
+<Base
+  title="Placements â€” 2,395 engineers and counting"
+  description="2,395 students placed in 1,220+ companies. â‚¹44,000 average monthly salary, 35 LPA highest. See where AcademiQ Fellowship alumni work and what they earn."
+  page="placements"
+  suffix="S, PLACED"
+  scene="placements"
+  footLead="Your name belongs on this list."
+>
+  <!-- HERO -->
+  <section class="phero section--clear place-hero" data-theme="dark" data-stop="hero">
+    <div class="place-hero__drag" data-globe-drag data-cursor="spin" aria-hidden="true"></div>
+
+    <div class="cities" aria-hidden="true" data-cities>
+      {pins.map((p) => (
+        <span class="city mono" data-city={p.index}><i></i>{p.name}</span>
+      ))}
+      <span class="city city--home mono" data-city="-1"><i></i>wayand HQ</span>
+    </div>
+
+    <div class="wrap">
+      <div class="phero__meta mono" data-phero-fade>
+        <span class="label">Placements</span>
+        <span class="place-hero__hint"><Arrow dir="e" /> Drag the globe</span>
+      </div>
+
+      <h1 class="phero__title" style="--ts:15;--ts-m:16.5" aria-label={`${inr(stats.placed)} placed, and counting.`}>
+        <span class="phero__line" aria-hidden="true">
+          <span class="phero__mask"><span data-phero-in>{inr(stats.placed)}</span></span>
+          <span class="phero__mask"><span data-phero-in>PLACED</span></span>
+        </span>
+        <span class="phero__line" aria-hidden="true">
+          <span class="phero__mask phero__mask--serif"><span class="serif accent" data-phero-in>&amp; counting.</span></span>
+        </span>
+      </h1>
+
+      <div class="phero__foot">
+        <p class="lead phero__lead" data-phero-fade>
+          Every number on this page is a person who walked in unsure and walked out employed. Here is where they went,
+          and what they earn.
+        </p>
+        <ul class="place-hero__facts" data-phero-fade>
+          <li><b>â‚¹{inr(stats.avgMonthly)}</b><span class="mono">average / month</span></li>
+          <li><b>{stats.highestLpa} LPA</b><span class="mono">highest</span></li>
+          <li><b>{inr(stats.companies)}+</b><span class="mono">companies</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- NUMBERS -->
+  <section class="nums section" data-theme="paper">
+    <div class="wrap">
+      <SectionHead no="01" label="The numbers" meta="As published on AcademiQ.com/alumni">
+        <Fragment slot="title">Counted, not <span class="serif accent">claimed.</span></Fragment>
+        <p class="body" data-reveal="up">
+          These figures come straight from AcademiQâ€™s own placement records. No rounding up, no â€œup toâ€.
+        </p>
+      </SectionHead>
+
+      <div class="nums__grid">
+        <article class="num num--hero card" data-reveal="up">
+          <header class="num__top mono"><span>01</span><span>Placements</span></header>
+          <p class="num__value"><span data-odo={inr(stats.placed)}>{inr(stats.placed)}</span></p>
+          <footer class="num__foot">
+            <h3 class="h4">Students placed</h3>
+            <p class="small">In {inr(stats.companies)}+ companies, over {stats.years} years.</p>
+          </footer>
+          <figure class="dots" data-cursor="none">
+            <canvas data-dots data-count={stats.placed} data-share={stats.nonIt / 100} aria-hidden="true"></canvas>
+            <figcaption class="mono">
+              <span>One dot, one engineer</span>
+              <span><i class="dots__key dots__key--a"></i>Non-IT <i class="dots__key dots__key--b"></i>IT</span>
+            </figcaption>
+          </figure>
+        </article>
+
+        <article class="num card" data-reveal="up" data-tilt="4">
+          <header class="num__top mono"><span>02</span><span>Average</span></header>
+          <p class="num__value"><span data-odo={String(stats.avgLpa)}>{stats.avgLpa}</span><span class="num__unit num__unit--after">LPA</span></p>
+          <footer class="num__foot">
+            <h3 class="h4">Average salary</h3>
+            <p class="small">â‚¹{inr(stats.avgMonthly)} a month, averaged across every placed student.</p>
+          </footer>
+        </article>
+
+        <article class="num card" data-reveal="up" data-tilt="4">
+          <header class="num__top mono"><span>03</span><span>Range</span></header>
+          <p class="num__value"><span data-odo={String(stats.lowestLpa)}>{stats.lowestLpa}</span><span class="num__unit num__unit--after">â†’</span><span data-odo={String(stats.highestLpa)}>{stats.highestLpa}</span></p>
+          <footer class="num__foot">
+            <h3 class="h4">LPA, lowest to highest</h3>
+            <p class="small">The published salary range of AcademiQ Fellowship placements.</p>
+          </footer>
+        </article>
+
+        <article class="num num--red card" data-theme="red" data-reveal="up" data-tilt="3">
+          <header class="num__top mono"><span>04</span><span>Combined</span></header>
+          <p class="num__value"><span class="num__unit">â‚¹</span><span data-odo={String(stats.alumniIncomeCr)}>{stats.alumniIncomeCr}</span><span class="num__unit num__unit--after">Cr</span></p>
+          <footer class="num__foot">
+            <h3 class="h4">Earned by our alumni</h3>
+            <p class="small">The income generated by {inr(stats.placed)} alumni since they were placed.</p>
+          </footer>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPREAD -->
+  <section class="section spread" data-theme="dark" data-spread>
+    <div class="wrap">
+      <SectionHead no="02" label="The top of the range" meta={`${paid.length} published packages`}>
+        <Fragment slot="title">How high it <span class="serif accent">goes.</span></Fragment>
+        <p class="body" data-reveal="up">
+          Each dot is one alumnus and the package they have published. These are our highest earners, not the norm â€” the
+          average across all {inr(stats.placed)} placements is {stats.avgLpa} LPA.
+        </p>
+      </SectionHead>
+
+      <div class="plot" style={`--levels:${levels}`} data-plot>
+        <div class="plot__field">
+          <span class="plot__avg" style={`--x:${(stats.avgLpa / MAX) * 100}%`}>
+            <em class="mono">Average Â· {stats.avgLpa} LPA</em>
+          </span>
+          {plot.map((p) => (
+            <button
+              class="plot__dot"
+              type="button"
+              style={`--x:${p.x}%;--l:${p.level}`}
+              data-plot-dot
+              data-name={p.name}
+              data-company={p.company}
+              data-stack={p.stack}
+              data-lpa={p.lpa}
+              data-kind={p.kind}
+              data-cursor="none"
+              aria-label={`${p.name}, ${p.lpa} LPA at ${p.company}`}
+            ></button>
+          ))}
+        </div>
+        <div class="plot__axis mono">
+          {ticks.map((t) => <span style={`--x:${(t / MAX) * 100}%`}>{t}<small> LPA</small></span>)}
+        </div>
+
+        <div class="plot__tip" data-plot-tip aria-hidden="true">
+          <p class="plot__tip-lpa"><b data-tip-lpa>35</b><span class="mono">LPA</span></p>
+          <p class="plot__tip-name" data-tip-name></p>
+          <p class="mono dim" data-tip-company></p>
+          <span class="tag" data-tip-stack></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WALL -->
+  <section class="section roll" data-theme="paper" data-roll>
+    <div class="wrap">
+      <SectionHead no="03" label="The alumni" meta={`${alumni.length} of ${inr(stats.placed)}`}>
+        <Fragment slot="title">Names, not <span class="serif accent">numbers.</span></Fragment>
+        <div class="roll__filters" role="tablist" aria-label="Filter alumni by track" data-reveal="up">
+          {tracks.map((t, i) => (
+            <button class={`cat__filter${i === 0 ? ' is-active' : ''}`} type="button" role="tab" aria-selected={i === 0 ? 'true' : 'false'} data-filter={t} data-cursor="link">
+              <span>{t}</span><sup>{String(count(t)).padStart(2, '0')}</sup>
+            </button>
+          ))}
+        </div>
+      </SectionHead>
+
+      <ul class="roll__grid" data-roll-grid>
+        {alumni.map((a, i) => (
+          <li class="person card" data-person data-track={a.track}>
+            <header class="person__top">
+              <span class="person__mono" aria-hidden="true">{initials(a.name)}</span>
+              <span class="mono dimmer">{String(i + 1).padStart(2, '0')}</span>
+            </header>
+            <p class="person__lpa">
+              {a.lpa ? <b>{a.lpa}</b> : <b class="person__na">â€”</b>}
+              <span class="mono">{a.lpa ? `LPA Â· ${a.kind === 'current' ? 'current' : 'placed'}` : 'Package undisclosed'}</span>
+            </p>
+            <footer class="person__foot">
+              <h3 class="h4">{a.name}</h3>
+              <p class="small">{a.company}</p>
+              <span class="tag">{a.stack}</span>
+            </footer>
+          </li>
+        ))}
+      </ul>
+
+      <div class="roll__more" data-reveal="up">
+        <p class="small">Some alumni are not listed, because of company policies or personal preference.</p>
+        <Button href={external.alumni} label={`Browse all ${inr(stats.placed)}`} variant="light" />
+      </div>
+    </div>
+  </section>
+
+  <!-- WHERE -->
+  <section class="section section--clear where" data-theme="dark" data-stop="where" data-where>
+    <div class="wrap where__grid">
+      <header class="where__head">
+        <span class="label"><span class="label__no">04</span> Where they work</span>
+        <h2 class="h1" data-reveal="lines">From wayand.<br />To <span class="serif accent">everywhere.</span></h2>
+        <p class="lead" data-reveal="up">Hover a region and the globe will take you there.</p>
+      </header>
+
+      <ul class="where__list">
+        {regions.map((r, i) => (
+          <li class="region" data-region data-lon={r.lon} data-lat={r.lat} data-reveal="up" tabindex="0" data-cursor="link">
+            <div class="region__head">
+              <span class="mono dimmer">{String(i + 1).padStart(2, '0')}</span>
+              <h3 class="region__name">{r.name}</h3>
+              <span class="mono dim">{String(r.places.length).padStart(2, '0')}{r.name === 'India' ? '+' : ''}</span>
+            </div>
+            <p class="region__places">{r.places.join(' Â· ')}</p>
+          </li>
+        ))}
+        <li class="region region--remote" data-reveal="up">
+          <div class="region__head">
+            <span class="mono dimmer">{String(regions.length + 1).padStart(2, '0')}</span>
+            <h3 class="region__name">Remote</h3>
+            <span class="mono dim">WFH</span>
+          </div>
+          <p class="region__places">Anywhere with a laptop and a connection.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- BACKGROUNDS -->
+  <section class="section from" data-theme="paper">
+    <div class="wrap">
+      <SectionHead no="05" label="Where they came from" meta="Qualifications of placed alumni">
+        <Fragment slot="title">Nobody asked for a <span class="serif accent">CS degree.</span></Fragment>
+      </SectionHead>
+
+      <article class="num num--bg card from__switch" data-reveal="up" data-bg>
+        <header class="num__top mono"><span>Background</span><span>Pick yours</span></header>
+        <div class="bg__switch" role="tablist" aria-label="Select your background">
+          <button class="bg__tab is-active" role="tab" aria-selected="true" data-bg-tab="non" data-cursor="link" type="button">Iâ€™m from a non-IT background</button>
+          <button class="bg__tab" role="tab" aria-selected="false" data-bg-tab="it" data-cursor="link" type="button">Iâ€™m from an IT background</button>
+        </div>
+        <div class="bg__read">
+          <p class="num__value bg__value"><span data-bg-value>{stats.nonIt}</span><span class="num__unit num__unit--after">%</span></p>
+          <p class="bg__text" data-bg-text aria-live="polite">
+            About <strong>{inr(nonItCount)}</strong> of our placed students came from outside IT. Commerce, arts,
+            pharmacy, hotel management, architecture â€” they are engineers now.
+          </p>
+        </div>
+        <div class="bg__bar" data-bg-bar aria-hidden="true" data-non={stats.nonIt} data-it={stats.it}>
+          {Array.from({ length: 40 }).map(() => <i></i>)}
+        </div>
+        <template data-bg-copy="non">
+          About <strong>{inr(nonItCount)}</strong> of our placed students came from outside IT. Commerce, arts,
+          pharmacy, hotel management, architecture â€” they are engineers now.
+        </template>
+        <template data-bg-copy="it">
+          About <strong>{inr(itCount)}</strong> came from an IT background â€” and chose AcademiQ Fellowship to turn theory into
+          skills that employers actually pay for.
+        </template>
+      </article>
+    </div>
+
+    <div class="from__mq">
+      <Marquee speed={90} class="quals quals--paper">
+        {qualifications.map((q) => <span class="mq__item quals__item"><span>{q}</span><i aria-hidden="true">â†’</i></span>)}
+      </Marquee>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section class="section partners" data-theme="dark">
+    <div class="wrap">
+      <SectionHead no="06" label="Who hires them" meta={`${inr(stats.companies)}+ companies`}>
+        <Fragment slot="title">Startups. Unicorns. <span class="serif accent">Giants.</span></Fragment>
+        <div data-reveal="up"><Button href="/hire/" label="Hire from AcademiQ" variant="ghost" /></div>
+      </SectionHead>
+    </div>
+    <div class="wall">
+      {rows.map((row, i) => (
+        <Marquee speed={46 + i * 14} dir={i % 2 ? 1 : -1} data-pause>
+          {row.map((p) => <span class={`mq__item wall__item${i === 1 ? ' wall__item--ghost' : ''}`}><span>{p}</span><i aria-hidden="true"></i></span>)}
+        </Marquee>
+      ))}
+    </div>
+  </section>
+
+  <!-- STORIES -->
+  <section class="section" data-theme="dark">
+    <div class="wrap stories" style="margin-top:0">
+      <header class="stories__head">
+        <h2 class="h3" data-reveal="lines">Hear it from them.</h2>
+        <p class="mono dim">Transformation stories Â· video</p>
+      </header>
+      <ul class="stories__grid">
+        {stories.map((s, i) => (
+          <li data-reveal="up">
+            <button class="story" type="button" data-video={s.id} data-video-title={s.title} data-cursor="play">
+              <span class="story__media">
+                <img src={`https://i.ytimg.com/vi/${s.id}/hqdefault.jpg`} alt="" loading="lazy" decoding="async" width="480" height="360" />
+                <span class="story__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor" /></svg></span>
+              </span>
+              <span class="story__meta mono"><span>{String(i + 1).padStart(2, '0')}</span><span>Watch</span></span>
+              <span class="story__from">{s.from}</span>
+              <span class="story__to"><Arrow dir="e" />{s.to}</span>
+              <span class="sr-only">Play video: {s.title}</span>
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- END -->
+  <section class="section end" data-theme="red">
+    <div class="wrap end__grid">
+      <h2 class="end__title" data-reveal="chars">No. {inr(stats.placed + 1)}<br />could be you.</h2>
+      <p class="lead end__text" data-reveal="up">The list grows every month. There is room on it.</p>
+      <div class="end__cta" data-reveal="up">
+        <Button href="/apply/" label="Apply for AcademiQ Fellowship" variant="light" size="lg" />
+        <Button href="/pay-after-placement/" label="Pay after you are placed" variant="ghost" size="lg" />
+      </div>
+    </div>
+  </section>
+</Base>
+

@@ -1,0 +1,45 @@
+﻿---
+import { stats } from '../data/site.js';
+---
+<div class="pre" data-pre aria-hidden="true">
+  <div class="pre__top mono">
+    <span>AcademiQ / Global Ecosystem</span>
+    <span>EST. 2026</span>
+  </div>
+
+  <div class="pre__mid">
+    <div class="pre__word bw" data-pre-word>
+      <span class="bw__box" data-pre-box>AC</span>
+      <span class="bw__rest pre__suffix">
+        <span data-pre-a>ADEMIQ</span>
+        <span data-pre-b>ADEMIQ</span>
+      </span>
+    </div>
+  </div>
+
+  <div class="pre__bottom">
+    <p class="pre__warn mono"><b>AcademiQ:</b> connecting minds across borders</p>
+    <div class="pre__count">
+      <small>learners connected</small>
+      <span data-pre-count data-to={stats.placed}>0000</span>
+    </div>
+  </div>
+
+  <div class="pre__bar"><i data-pre-bar></i></div>
+</div>
+
+<div class="curtain" data-curtain aria-hidden="true">
+  <div class="curtain__cols"><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="curtain__label">
+    <span data-curtain-a>AC</span>
+    <span data-curtain-b>ADEMIQ</span>
+  </div>
+</div>
+
+<script is:inline>
+  // the curtain is already drawn when a page is reached through a link — give it the right word at once
+  (function () {
+    var b = document.querySelector('[data-curtain-b]');
+    if (b && document.body.dataset.suffix) b.textContent = document.body.dataset.suffix;
+  })();
+</script>

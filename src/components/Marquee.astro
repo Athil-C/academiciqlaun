@@ -1,0 +1,10 @@
+---
+/**
+ * Infinite marquee. Put `.mq__item` children in the slot.
+ * speed: px / second.  dir: -1 (left) | 1 (right).
+ */
+const { speed = 70, dir = -1, class: className = '', ...rest } = Astro.props;
+---
+<div class={`mq ${className}`} data-mq data-speed={speed} data-dir={dir} {...rest}>
+  <div class="mq__track" data-mq-track><slot /></div>
+</div>

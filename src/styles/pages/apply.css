@@ -1,0 +1,148 @@
+/* ==========================================================================
+   APPLY
+   ========================================================================== */
+
+.go {
+  align-content: center;
+  padding-bottom: clamp(3rem, 6vw, 6rem);
+}
+
+.go__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(2rem, 5vw, 6rem);
+  align-items: end;
+}
+
+.go__copy {
+  display: grid;
+  gap: clamp(1.25rem, 2.2vw, 2.4rem);
+  align-content: end;
+}
+
+.go__copy .phero__meta {
+  margin-bottom: 0;
+}
+
+.go__lead {
+  max-width: 34ch;
+}
+
+.go__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem clamp(1.5rem, 3vw, 3.5rem);
+  padding-top: clamp(1rem, 1.6vw, 1.75rem);
+  border-top: 1px solid var(--rule);
+}
+
+.go__facts li {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.go__facts b {
+  font-weight: 800;
+  font-stretch: 75%;
+  font-size: clamp(1.8rem, 3vw, 3.3rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+
+.go__facts span {
+  color: var(--fg-2);
+}
+
+.go__form {
+  padding: clamp(1.25rem, 2.2vw, 2.4rem);
+  background: rgba(9, 9, 10, 0.74);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+.go__form .field input {
+  font-size: clamp(1.3rem, 2vw, 2rem);
+}
+
+@media (max-width: 1000px) {
+  .go__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* desks */
+.desks {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap);
+}
+
+.desk {
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  gap: 1rem;
+  min-height: clamp(15rem, 20vw, 21rem);
+  padding: clamp(1.1rem, 1.7vw, 1.9rem);
+  color: var(--fg);
+  background: var(--bg);
+}
+
+.desk__phone {
+  align-self: end;
+  font-weight: 800;
+  font-stretch: 75%;
+  font-size: clamp(2rem, 3.4vw, 3.8rem);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  transition: font-stretch 0.7s var(--ease-out), color 0.3s var(--ease-out);
+}
+
+a.desk__phone:hover,
+.desk--wa:hover .desk__phone {
+  font-stretch: 92%;
+  color: var(--red-hot);
+}
+
+.desk__mail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  font-size: clamp(0.95rem, 1.15vw, 1.25rem);
+  font-stretch: 92%;
+  overflow-wrap: anywhere;
+}
+
+.desk__mail .orb {
+  width: 2.4rem;
+  flex: none;
+}
+
+.desk--ceo {
+  box-shadow: none;
+}
+
+.desk--ceo .orb {
+  --accent: var(--ink);
+  --accent-fg: #fff;
+}
+
+.desk--wa .small,
+.desk--ceo .small {
+  color: var(--fg-2);
+}
+
+@media (max-width: 1000px) {
+  .desks {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .desks {
+    grid-template-columns: 1fr;
+  }
+}

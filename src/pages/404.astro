@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+import '../styles/pages/inner.css';
+import { nav } from '../data/site.js';
+---
+
+<Base title="Page not found" description="This page took a wrong turn." page="lost" suffix="KEN LINK" scene="lost" footLead="Lost? Start here.">
+  <section class="phero section--clear" data-theme="dark" data-stop="hero">
+    <div class="wrap">
+      <div class="phero__meta mono" data-phero-fade>
+        <span class="label">Error 404</span>
+        <span>This page took a wrong turn</span>
+      </div>
+
+      <h1 class="phero__title" style="--ts:16.5;--ts-m:21" aria-label="Lost, bro?">
+        <span class="phero__line" aria-hidden="true">
+          <span class="phero__mask"><span data-phero-in>LOST,</span></span>
+        </span>
+        <span class="phero__line" aria-hidden="true">
+          <span class="bw"><span class="bw__box" data-pre-target data-pre-suffix="">BRO</span><span class="bw__rest bw__rest--tight">?</span></span>
+        </span>
+      </h1>
+
+      <div class="phero__foot">
+        <p class="lead phero__lead" data-phero-fade>
+          Every engineer has followed a broken link. The good ones find their way back. Try one of these.
+        </p>
+        <div class="phero__cta" data-phero-fade>
+          <Button href="/" label="Back to home" size="lg" />
+          {nav.slice(0, 3).map((n) => <Button href={n.href} label={n.short || n.label} variant="ghost" size="lg" />)}
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

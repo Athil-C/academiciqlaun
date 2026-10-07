@@ -1,0 +1,8 @@
+---
+/** Diagonal arrow. `dir`: 'ne' (default) | 'e' | 's' | 'n' */
+const { dir = 'ne' } = Astro.props;
+const rot = { ne: 0, e: 45, s: 135, n: -45 }[dir] ?? 0;
+---
+<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" style={rot ? `rotate:${rot}deg` : undefined}>
+  <path d="M3.5 12.5 12.5 3.5M5 3.5h7.5V11" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" />
+</svg>

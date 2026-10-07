@@ -1,0 +1,226 @@
+﻿---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+import Arrow from '../components/Arrow.astro';
+import Marquee from '../components/Marquee.astro';
+import SectionHead from '../components/SectionHead.astro';
+import '../styles/blocks.css';
+import '../styles/pages/inner.css';
+import '../styles/pages/hire.css';
+
+import { stats, contacts, external, inr } from '../data/site.js';
+import { hiringPartners, roles, models, filters, voices, stack } from '../data/hire.js';
+
+const third = Math.ceil(hiringPartners.length / 3);
+const rows = [hiringPartners.slice(0, third), hiringPartners.slice(third, third * 2), hiringPartners.slice(third * 2)];
+const half = Math.ceil(stack.length / 2);
+---
+
+<Base
+  title="Hire From Us â€” industry-ready developers"
+  description="Hire developers who have already shipped two verified projects and survived weekly expert reviews. 2,395 placed in 1,220+ companies."
+  page="hire"
+  suffix="S FOR HIRE"
+  scene="hire"
+  footLead="Need engineers? We know a few."
+>
+  <!-- HERO -->
+  <section class="phero section--clear" data-theme="dark" data-stop="hero">
+    <div class="wrap">
+      <div class="phero__meta mono" data-phero-fade>
+        <span class="label">For companies</span>
+        <span>{inr(stats.placed)} placed Â· {inr(stats.companies)}+ companies hiring</span>
+      </div>
+
+      <h1 class="phero__title" style="--ts:16.5;--ts-m:22" aria-label="Hire a bro.">
+        <span class="phero__line" aria-hidden="true">
+          <span class="phero__mask"><span data-phero-in>HIRE</span></span>
+          <span class="phero__mask phero__mask--serif"><span class="serif accent" data-phero-in>a</span></span>
+        </span>
+        <span class="phero__line" aria-hidden="true">
+          <span class="bw"><span class="bw__box" data-pre-target data-pre-suffix="">BRO</span><span class="bw__rest bw__rest--tight">.</span></span>
+        </span>
+      </h1>
+
+      <div class="phero__foot">
+        <p class="lead phero__lead" data-phero-fade>
+          We do not train talent; we uncover it. Only the ones who make it through a year of weekly reviews reach your
+          interview room.
+        </p>
+        <div class="phero__cta" data-phero-fade>
+          <Button href={`tel:${contacts.placements.tel}`} label="Call placements" variant="ghost" size="lg" />
+          <Button href="#enquire" label="Enquire for hiring" size="lg" icon="s" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROLES -->
+  <section class="section section--clear" data-theme="dark" data-stop="dust">
+    <div class="wrap state__grid">
+      <div class="state__label"><span class="label"><span class="label__no">01</span> The problem</span></div>
+      <p class="state__text" data-scrub-words>
+        Hiring junior engineers is a gamble. RÃ©sumÃ©s look alike, degrees prove little, and the first six months are
+        spent teaching what should already be known. <em>Ours arrive having done the work.</em>
+      </p>
+      <div class="state__aside">
+        <p class="mono dim" data-reveal="up">Roles you can hire for</p>
+        <ul class="roles" data-reveal="up">
+          {roles.map((r) => <li class="tag">{r}</li>)}
+          <li class="tag tag--solid">&amp; more</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODELS -->
+  <section class="section" data-theme="paper">
+    <div class="wrap">
+      <SectionHead no="02" label="How to work with us" meta="Three models">
+        <Fragment slot="title">Three ways to <span class="serif accent">hire.</span></Fragment>
+        <p class="body" data-reveal="up">
+          Whether you need one developer next week or a team trained on your own tooling, there is a model that fits.
+        </p>
+      </SectionHead>
+
+      <div class="tiles">
+        {models.map((m) => (
+          <article class="tile card model" data-reveal="up" data-tilt="4">
+            <header class="tile__top mono"><span>{m.no}</span><span>Model</span></header>
+            <h3 class="model__name">{m.name}</h3>
+            <div class="tile__body"><p class="body">{m.text}</p></div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FILTER -->
+  <section class="section sieve" data-theme="dark" data-sieve>
+    <div class="wrap">
+      <SectionHead no="03" label="The filter" meta="What every candidate survives">
+        <Fragment slot="title">A year-long <span class="serif accent">interview.</span></Fragment>
+        <p class="body" data-reveal="up">
+          By the time a AcademiQ Fellowship candidate reaches you, they have been reviewed week after week for a year. This is what
+          stands between an applicant and your shortlist.
+        </p>
+      </SectionHead>
+
+      <ol class="sieve__list">
+        {filters.map((f, i) => (
+          <li class="sieve__row" data-sieve-row style={`--i:${i}`}>
+            <span class="sieve__no">{f.no}</span>
+            <h3 class="sieve__name">{f.name}</h3>
+            <p class="sieve__text">{f.text}</p>
+            <span class="sieve__bar" aria-hidden="true"><i style={`--w:${100 - i * 22}%`}></i></span>
+          </li>
+        ))}
+      </ol>
+      <p class="sieve__note mono dim" data-reveal="up">Bars are illustrative: each stage narrows the field. They are not pass rates.</p>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section class="section stacks" data-theme="dark" style="padding-top:0">
+    <div class="wrap">
+      <SectionHead no="04" label="What they know" meta="Technologies on offer">
+        <Fragment slot="title">Fluent in your <span class="serif accent">stack.</span></Fragment>
+      </SectionHead>
+    </div>
+    <div class="wall">
+      <Marquee speed={70}>
+        {stack.slice(0, half).map((s) => <span class="mq__item wall__item"><span>{s}</span><i aria-hidden="true"></i></span>)}
+      </Marquee>
+      <Marquee speed={55} dir={1}>
+        {stack.slice(half).map((s) => <span class="mq__item wall__item wall__item--ghost"><span>{s}</span><i aria-hidden="true"></i></span>)}
+      </Marquee>
+    </div>
+  </section>
+
+  <!-- VOICES -->
+  <section class="section voices" data-theme="paper">
+    <div class="wrap">
+      <SectionHead no="05" label="From hiring managers" meta="In their words">
+        <Fragment slot="title">Do not take <span class="serif accent">our</span> word for it.</Fragment>
+        <div data-reveal="up"><Button href={external.hiring} label="Watch the testimonials" variant="light" /></div>
+      </SectionHead>
+
+      <div class="voices__grid">
+        {voices.map((v, i) => (
+          <figure class="voice card" data-reveal="up" data-tilt="3">
+            <span class="voice__mark" aria-hidden="true">â€œ</span>
+            <blockquote class="voice__quote">{v.quote}</blockquote>
+            <figcaption class="voice__by">
+              <span class="h4">{v.name}</span>
+              <span class="mono dim">{v.role}</span>
+            </figcaption>
+            <span class="voice__no mono dimmer" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section class="section partners" data-theme="dark">
+    <div class="wrap">
+      <SectionHead no="06" label="In good company" meta={`${inr(stats.companies)}+ employers`}>
+        <Fragment slot="title">Already hiring our <span class="serif accent">alumni.</span></Fragment>
+      </SectionHead>
+    </div>
+    <div class="wall">
+      {rows.map((row, i) => (
+        <Marquee speed={46 + i * 14} dir={i % 2 ? 1 : -1} data-pause>
+          {row.map((p) => <span class={`mq__item wall__item${i === 1 ? ' wall__item--ghost' : ''}`}><span>{p}</span><i aria-hidden="true"></i></span>)}
+        </Marquee>
+      ))}
+    </div>
+  </section>
+
+  <!-- ENQUIRE -->
+  <section class="section join" data-theme="red" id="enquire">
+    <div class="wrap join__grid">
+      <header class="join__head">
+        <span class="label label--plain"><span class="dot" style="background:#fff"></span> Enquire for hiring</span>
+        <h2 class="display join__title" data-reveal="chars">Letâ€™s<br />talk.</h2>
+        <p class="lead" data-reveal="up">
+          Tell us what you are building and who you need. The placements team will come back to you with candidates, not
+          a brochure.
+        </p>
+        <ul class="join__direct" data-reveal="up">
+          <li><span class="mono">Call</span><a class="link" href={`tel:${contacts.placements.tel}`}>{contacts.placements.phone}</a></li>
+          <li><span class="mono">Write</span><a class="link" href={`mailto:${contacts.placements.email}`}>{contacts.placements.email}</a></li>
+        </ul>
+      </header>
+
+      <div class="join__form" data-reveal="up">
+        <form class="form" data-form="mail" data-to={contacts.placements.email} novalidate>
+          <div class="field" data-rule="name">
+            <label class="field__label" for="hire-name"><span>01 â€” Your name</span><span class="field__error" aria-live="polite"></span></label>
+            <div class="field__control"><input id="hire-name" name="name" type="text" autocomplete="name" placeholder="Who are we speaking to?" required /></div>
+          </div>
+          <div class="field" data-rule="company">
+            <label class="field__label" for="hire-company"><span>02 â€” Company</span><span class="field__error" aria-live="polite"></span></label>
+            <div class="field__control"><input id="hire-company" name="company" type="text" autocomplete="organization" placeholder="Where do you work?" required /></div>
+          </div>
+          <fieldset class="field">
+            <legend class="field__label"><span>03 â€” Who do you need?</span></legend>
+            <div class="choices">
+              {roles.map((r, i) => (
+                <label class="choice"><input type="radio" name="roles" value={r} checked={i === 0} /><span>{r}</span></label>
+              ))}
+            </div>
+          </fieldset>
+          <div class="field">
+            <label class="field__label" for="hire-msg"><span>04 â€” Anything else?</span><span class="dim">Optional</span></label>
+            <div class="field__control"><textarea id="hire-msg" name="message" rows="2" placeholder="Team size, stack, timelineâ€¦"></textarea></div>
+          </div>
+          <Button type="submit" label="Compose enquiry email" variant="light" size="lg" block magnetic={false} />
+          <p class="form__note">This opens your mail app with the enquiry written out, addressed to {contacts.placements.email}.</p>
+          <p class="form__done mono" data-form-done hidden><span class="dot"></span> Your mail app is opening. Nothing happened? Write to {contacts.placements.email}.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</Base>
+

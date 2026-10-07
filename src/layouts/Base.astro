@@ -1,0 +1,121 @@
+﻿---
+import '@fontsource-variable/anek-latin/wdth.css';
+import '@fontsource-variable/fraunces/opsz-italic.css';
+import '@fontsource-variable/jetbrains-mono/wght.css';
+import '@fontsource-variable/anek-malayalam/wght.css';
+import '../styles/global.css';
+import '../styles/components.css';
+import anekUrl from '@fontsource-variable/anek-latin/files/anek-latin-latin-wdth-normal.woff2?url';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Preloader from '../components/Preloader.astro';
+import { brand } from '../data/site.js';
+
+const {
+  title,
+  description = 'AcademiQ is a growing global ecosystem connecting students, researchers, scholars and institutions through education, research, mentorship and meaningful opportunities.',
+  page = 'home',
+  suffix = 'ADEMIQ', // what follows [AC] on the transition curtain
+  scene = 'home', // which WebGL scene the page runs
+  footLead,
+} = Astro.props;
+
+const fullTitle = title ? `${title} — ${brand.name}` : `${brand.name} — ${brand.tagline}`;
+const canonical = new URL(Astro.url.pathname, Astro.site || 'https://academiq.org').href;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#09090a" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" as="font" type="font/woff2" href={anekUrl} crossorigin />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={brand.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script is:inline>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add('js');
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce) d.classList.add('no-motion');
+        var seen = false;
+        var arriving = false;
+        try {
+          seen = sessionStorage.getItem('aq:seen') === '1';
+          arriving = sessionStorage.getItem('aq:nav') === '1';
+          sessionStorage.removeItem('aq:nav');
+        } catch (e) {}
+        if (!reduce) {
+          if (!seen) d.classList.add('is-loading');
+          else if (arriving) d.classList.add('is-entering');
+        }
+        // If the app never boots, never leave the visitor staring at a blank page.
+        window.__aqFailsafe = setTimeout(function () {
+          d.classList.add('is-failsafe');
+          d.classList.remove('is-loading', 'is-entering');
+        }, 7000);
+      })();
+    </script>
+    <noscript>
+      <style>
+        .pre, .curtain, .cursor, .gl { display: none !important; }
+      </style>
+    </noscript>
+  </head>
+
+  <body data-page={page} data-suffix={suffix}>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <div class="progress" data-progress aria-hidden="true"></div>
+    <canvas class="gl" data-gl data-scene={scene} aria-hidden="true"></canvas>
+    <div class="grain" aria-hidden="true"></div>
+
+    <div class="cursor" data-cursor-el aria-hidden="true">
+      <div class="cursor__ring" data-cursor-ring>
+        <span class="cursor__disc"></span>
+        <span class="cursor__text" data-cursor-text></span>
+      </div>
+      <div class="cursor__dot" data-cursor-dot></div>
+    </div>
+
+    <Preloader />
+    <Nav />
+
+    <main id="main">
+      <span id="top" class="sr-only"></span>
+      <slot />
+    </main>
+
+    <Footer lead={footLead} />
+
+    <dialog class="vid" data-vid aria-label="Video player">
+      <div class="vid__inner">
+        <div class="vid__bar mono">
+          <span data-vid-title>AcademiQ</span>
+          <button class="vid__close mono" type="button" data-vid-close data-cursor="link">
+            Close <span aria-hidden="true">✕</span>
+          </button>
+        </div>
+        <div class="vid__frame" data-vid-frame></div>
+      </div>
+    </dialog>
+
+    <div class="toast" data-toast role="status" aria-live="polite"></div>
+
+    <script>
+      import '../scripts/app.js';
+    </script>
+  </body>
+</html>
+
+

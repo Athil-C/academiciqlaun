@@ -1,0 +1,47 @@
+---
+import Arrow from './Arrow.astro';
+/**
+ * The one button. Renders <a> when `href` is set, otherwise <button>.
+ * variant: 'primary' | 'ghost' | 'light'   size: 'sm' | 'md' | 'lg'
+ */
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  block = false,
+  icon = 'ne',
+  magnetic = true,
+  class: className = '',
+  label,
+  ...rest
+} = Astro.props;
+const Tag = href ? 'a' : 'button';
+const external = typeof href === 'string' && /^(https?:)?\/\//.test(href);
+const cls = [
+  'btn',
+  variant !== 'primary' && `btn--${variant}`,
+  size !== 'md' && `btn--${size}`,
+  block && 'btn--block',
+  className,
+]
+  .filter(Boolean)
+  .join(' ');
+---
+<Tag
+  class={cls}
+  href={href}
+  data-btn
+  data-magnetic={magnetic ? '0.28' : undefined}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener' : undefined}
+  {...rest}
+>
+  <span class="btn__fill" aria-hidden="true"></span>
+  <span class="btn__label" data-text={label}><span>{label}</span></span>
+  {icon && (
+    <span class="btn__icon" aria-hidden="true">
+      <Arrow dir={icon} />
+      <Arrow dir={icon} />
+    </span>
+  )}
+</Tag>

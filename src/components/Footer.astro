@@ -1,0 +1,100 @@
+﻿---
+import Button from './Button.astro';
+import { nav, contacts, hubs, socials, external, partners, brand } from '../data/site.js';
+const year = new Date().getFullYear();
+const { lead = 'Your next opportunity could start here.' } = Astro.props;
+---
+<footer class="foot" data-theme="dark" data-nav-theme="dark">
+  <div class="wrap">
+    <div class="foot__top">
+      <div class="foot__lead">
+        <span class="label">Your move</span>
+        <h2 class="h3" data-reveal="lines">{lead}</h2>
+        <p class="body">
+          Join a growing network of students, researchers, scholars and mentors learning, collaborating and creating opportunities together.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:.75rem">
+          <Button href="#apply" label="Join AcademiQ ↗" />
+          <Button href={`mailto:${contacts.official.email}`} label="Start a conversation" variant="ghost" />
+        </div>
+      </div>
+
+      <div class="foot__cols">
+        <div class="foot__col">
+          <h3 class="mono">Navigate</h3>
+          <ul>
+            <li><a class="link link--quiet" href="#who-we-are">Who We Are</a></li>
+            <li><a class="link link--quiet" href="#what-we-do">What We Do</a></li>
+            <li><a class="link link--quiet" href="#reach">Our Reach</a></li>
+            <li><a class="link link--quiet" href="#journey">Our Journey</a></li>
+            <li><a class="link link--quiet" href="#founders">Founders</a></li>
+            <li><a class="link link--quiet" href="#events">Events</a></li>
+            <li><a class="link link--quiet" href="#apply">Join Us</a></li>
+          </ul>
+        </div>
+
+        <div class="foot__col">
+          <h3 class="mono">Connect</h3>
+          <ul>
+            <li><a class="link link--quiet" href={`tel:${contacts.admissions.tel}`}>{contacts.admissions.phone}</a></li>
+            <li><a class="link link--quiet" href={`mailto:${contacts.admissions.email}`}>{contacts.admissions.email}</a></li>
+          </ul>
+          <h3 class="mono" style="margin-top:2rem">Collaborate</h3>
+          <ul>
+            <li><a class="link link--quiet" href={`mailto:${contacts.placements.email}`}>{contacts.placements.email}</a></li>
+          </ul>
+        </div>
+
+        <div class="foot__col">
+          <h3 class="mono">Ecosystem</h3>
+          <ul>
+            <li><a class="link link--quiet" href="#what-we-do">Higher Education</a></li>
+            <li><a class="link link--quiet" href="#what-we-do">Research Cohorts</a></li>
+            <li><a class="link link--quiet" href="#what-we-do">Writing Labs</a></li>
+            <li><a class="link link--quiet" href="#what-we-do">Opportunities</a></li>
+            {socials.map((s) => (
+              <li><a class="link link--quiet" href={s.href} target="_blank" rel="noopener">{s.label}</a></li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="foot__col foot__col--wide">
+          <h3 class="mono">Global Chapters</h3>
+          <p>{hubs.map((h) => h.city).join(' • ')} • Online Everywhere</p>
+        </div>
+
+        <div class="foot__col">
+          <h3 class="mono">Motto</h3>
+          <p>Connecting Minds.<br />Creating Opportunities.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot__partners mono">
+      <span>Collaborating with</span>
+      {partners.map((p) => <span class="tag">{p}</span>)}
+    </div>
+  </div>
+
+  <div class="foot__mark" aria-hidden="true" data-foot-mark>
+    <span class="foot__mark-box">AQ</span>
+    <span class="foot__mark-rest">
+      {'ADEMIQ'.split('').map((c) => <span data-foot-char>{c}</span>)}
+    </span>
+  </div>
+
+  <div class="wrap">
+    <div class="foot__base mono">
+      <span>© {year} {brand.legal}</span>
+      <span class="foot__clock">Global <b data-clock>--:--:--</b> UTC</span>
+      <ul>
+        <li><a href="#privacy">Privacy</a></li>
+        <li><a href="#terms">Terms</a></li>
+      </ul>
+      <a class="totop" href="#top" data-totop data-cursor="link">
+        Back to top
+        <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 11V1M1.5 5.5 6 1l4.5 4.5" stroke="currentColor" stroke-width="1.5" /></svg>
+      </a>
+    </div>
+  </div>
+</footer>

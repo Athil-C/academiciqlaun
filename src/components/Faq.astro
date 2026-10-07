@@ -1,0 +1,18 @@
+---
+/** Accessible accordion built on <details>. JS only adds the easing. */
+const { items = [], start = 1 } = Astro.props;
+---
+<div class="faq" data-faq>
+  {items.map((item, i) => (
+    <details class="faq__item" data-faq-item>
+      <summary class="faq__q" data-cursor="link">
+        <span class="faq__no mono">{String(i + start).padStart(2, '0')}</span>
+        <span class="faq__title">{item.q}</span>
+        <span class="faq__icon" aria-hidden="true"></span>
+      </summary>
+      <div class="faq__a" data-faq-panel>
+        <div class="faq__a-inner"><p>{item.a}</p></div>
+      </div>
+    </details>
+  ))}
+</div>

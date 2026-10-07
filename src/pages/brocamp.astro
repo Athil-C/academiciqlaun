@@ -1,0 +1,331 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+import Arrow from '../components/Arrow.astro';
+import Marquee from '../components/Marquee.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Faq from '../components/Faq.astro';
+import '../styles/pages/inner.css';
+import '../styles/pages/brocamp.css';
+
+import { stats, inr } from '../data/site.js';
+import { phases, pillars, requirements, admission, faqs, moments } from '../data/program.js';
+import { explainers } from '../data/alumni.js';
+
+let acc = 0;
+const timeline = phases.map((p) => {
+  const from = acc;
+  acc += p.months;
+  return { ...p, from, to: acc };
+});
+const groups = [...new Set(faqs.map((f) => f.group))];
+const loop = [
+  { no: '01', name: 'Learn', text: 'Work through open material at your own pace. No one spoon-feeds you, and that is the point.' },
+  { no: '02', name: 'Build', text: 'Apply it immediately. Two full projects of your own, plus one built with a team.' },
+  { no: '03', name: 'Get reviewed', text: 'Every week, an experienced industry expert evaluates where you really are.' },
+  { no: '04', name: 'Teach', text: 'Explain what you learnt to a peer. If you can teach it, you own it.' },
+];
+---
+
+<Base
+  title="AcademiQ Fellowship â€” the 12-month program"
+  description="AcademiQ Fellowship is AcademiQâ€™s 12-month intensive program: six phases, two projects, weekly reviews and placement support â€” with no tuition upfront."
+  page="AcademiQ Fellowship"
+  suffix="CAMP"
+  scene="AcademiQ Fellowship"
+  footLead="Twelve months from now, you will wish you had started today."
+>
+  <!-- HERO -->
+  <section class="phero section--clear" data-theme="dark" data-stop="hero">
+    <div class="wrap">
+      <div class="phero__meta mono" data-phero-fade>
+        <span class="label">The program</span>
+        <span>{stats.months} months Â· {stats.semesters} semesters Â· {stats.modules} modules</span>
+      </div>
+
+      <h1 class="phero__title" style="--ts:12.2;--ts-m:17.5" aria-label="AcademiQ Fellowship. Zero to engineer.">
+        <span class="phero__line" aria-hidden="true">
+          <span class="bw" data-pre-target data-pre-suffix="CAMP">
+            <span class="bw__box">BRO</span><span class="bw__rest">CAMP</span>
+          </span>
+        </span>
+        <span class="phero__line" aria-hidden="true">
+          <span class="phero__mask"><span data-phero-in>ZERO</span></span>
+          <span class="phero__mask phero__mask--serif"><span class="serif accent" data-phero-in>to</span></span>
+          <span class="phero__mask"><span data-phero-in>ENGINEER.</span></span>
+        </span>
+      </h1>
+
+      <div class="phero__foot">
+        <p class="lead phero__lead" data-phero-fade>
+          A twelve-month intensive, in-house or online, for people who are ready to work hard and build a high-paying
+          career in software â€” whatever they did before.
+        </p>
+        <div class="phero__cta" data-phero-fade>
+          <button class="watch" type="button" data-video={explainers[0].id} data-video-title={explainers[0].title} data-cursor="play">
+            <span class="watch__disc" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor" /></svg></span>
+            <span>What is AcademiQ Fellowship?</span>
+          </button>
+          <Button href="/apply/" label="Apply for AcademiQ Fellowship" size="lg" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IN BRIEF -->
+  <section class="section section--clear" data-theme="dark" data-stop="dust">
+    <div class="wrap state__grid">
+      <div class="state__label"><span class="label"><span class="label__no">01</span> In brief</span></div>
+      <p class="state__text" data-scrub-words>
+        There is a gap between what classrooms deliver and what the software industry needs.
+        <em>AcademiQ Fellowship is the bridge.</em> Twelve months of intensive, industry-relevant training â€” inside a community that
+        refuses to let you coast.
+      </p>
+      <div class="state__aside">
+        <p class="body" data-reveal="up">
+          Learning here goes beyond a classroom. You become part of a community of ambitious people who support, review
+          and push each other â€” until every one of you is employable.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILLARS -->
+  <section class="section" data-theme="paper">
+    <div class="wrap">
+      <SectionHead no="02" label="Foundations" meta="Three core principles">
+        <Fragment slot="title">Built on three <span class="serif accent">ideas.</span></Fragment>
+        <p class="body" data-reveal="up">
+          AcademiQ Fellowship does not run on lectures. It runs on open material, a method that makes you accountable, and the
+          people sitting next to you.
+        </p>
+      </SectionHead>
+
+      <div class="tiles">
+        {pillars.map((p, i) => (
+          <article class="tile card" data-reveal="up" data-tilt="4">
+            <header class="tile__top mono"><span>{String(i + 1).padStart(2, '0')}</span><span>Principle</span></header>
+            <span class="tile__glyph" aria-hidden="true">{['{ }', 'BRO', 'P2P'][i]}</span>
+            <div class="tile__body">
+              <h3 class="h4">{p.name}</h3>
+              <p class="small">{p.text}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- THE LOOP -->
+  <section class="section loop" data-theme="dark" data-loop>
+    <div class="wrap split">
+      <div class="split__head">
+        <span class="label"><span class="label__no">03</span> The method</span>
+        <h2 class="h2" data-reveal="lines">Learn. Build. Get reviewed. <span class="serif accent">Teach.</span></h2>
+        <p class="body" data-reveal="up">
+          One loop, repeated every week for a year. It is simple, it is demanding, and it is why AcademiQ Fellowship graduates can
+          be put on live projects from day one.
+        </p>
+        <figure class="orbit" aria-hidden="true" data-orbit>
+          <svg viewBox="0 0 200 200">
+            <circle class="orbit__track" cx="100" cy="100" r="78" />
+            <circle class="orbit__arc" cx="100" cy="100" r="78" data-orbit-arc />
+            {loop.map((l, i) => {
+              const a = (i / loop.length) * Math.PI * 2 - Math.PI / 2;
+              return (
+                <g class="orbit__node" data-orbit-node={i} transform={`translate(${100 + Math.cos(a) * 78} ${100 + Math.sin(a) * 78})`}>
+                  <circle r="5" />
+                  <text x={Math.cos(a) * 15} y={Math.sin(a) * 15 + 2.4} text-anchor={Math.abs(Math.cos(a)) < 0.3 ? 'middle' : Math.cos(a) > 0 ? 'start' : 'end'}>{l.name}</text>
+                </g>
+              );
+            })}
+            <text class="orbit__week" x="100" y="96" text-anchor="middle">week</text>
+            <text class="orbit__count" x="100" y="120" text-anchor="middle" data-orbit-week>01</text>
+          </svg>
+        </figure>
+      </div>
+
+      <ol class="split__body loop__list">
+        {loop.map((l, i) => (
+          <li class="loop__item" data-loop-item={i}>
+            <span class="loop__no">{l.no}</span>
+            <div>
+              <h3 class="h3">{l.name}</h3>
+              <p class="lead">{l.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- THE YEAR -->
+  <section class="section year" data-theme="paper" data-year>
+    <div class="wrap">
+      <SectionHead no="04" label="The year" meta="Six phases Â· twelve months">
+        <Fragment slot="title">Your next twelve <span class="serif accent">months.</span></Fragment>
+        <p class="body" data-reveal="up">
+          Every phase has a job to do and a way to prove you have done it. Nobody moves forward on attendance.
+        </p>
+      </SectionHead>
+
+      <div class="year__grid">
+        <aside class="year__rail" aria-hidden="true">
+          <div class="year__meter">
+            <span class="mono">Month</span>
+            <b data-year-month>00</b>
+          </div>
+          <div class="year__bar"><i data-year-fill></i></div>
+          <span class="mono dim" data-year-name>{timeline[0].name}</span>
+        </aside>
+
+        <ol class="year__list">
+          {timeline.map((p) => (
+            <li class="chap" data-chap data-from={p.from} data-to={p.to} data-name={p.name}>
+              <div class="chap__head">
+                <span class="chap__no">{p.no}</span>
+                <div class="chap__meta">
+                  <span class="tag tag--solid">{p.duration}</span>
+                  <span class="mono dim">Month {p.from.toFixed(1).replace('.0', '')} â†’ {p.to.toFixed(1).replace('.0', '')}</span>
+                </div>
+              </div>
+              <div class="chap__body">
+                <span class="mono accent">{p.verb}</span>
+                <h3 class="h2 chap__name">{p.name}</h3>
+                <p class="lead">{p.text}</p>
+                <p class="chap__out mono"><i aria-hidden="true"></i>{p.out}</p>
+              </div>
+              <div class="term chap__term" aria-hidden="true" data-term data-lines={JSON.stringify(p.code)}>
+                <div class="term__bar"><i></i><i></i><i></i><span class="mono">phase_{p.no}</span></div>
+                <pre class="term__body"><code data-term-out></code><span class="term__caret"></span></pre>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENTRY -->
+  <section class="section" data-theme="dark">
+    <div class="wrap split">
+      <div class="split__head">
+        <span class="label"><span class="label__no">05</span> Getting in</span>
+        <h2 class="h2" data-reveal="lines">The bar is <span class="serif accent">low.</span> The work is not.</h2>
+        <p class="body" data-reveal="up">
+          We do not ask what you studied or what you scored. We ask whether you will show up and do the work â€” every
+          day, for a year.
+        </p>
+        <div data-reveal="up"><Button href="/apply/" label="Start your application" /></div>
+      </div>
+
+      <dl class="split__body kv">
+        {requirements.map((r) => (
+          <div class="kv__row" data-reveal="up">
+            <dt class="kv__k">{r.k}</dt>
+            <dd class="kv__v">{r.v}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- FREE -->
+  <section class="section free" data-theme="red">
+    <div class="wrap free__grid">
+      <div class="free__head">
+        <span class="label label--plain">Before you pay anyone anything</span>
+        <h2 class="h1" data-reveal="lines">Start for free.</h2>
+      </div>
+      <div class="free__items">
+        <article class="free__item" data-reveal="up">
+          <p class="free__big">â‚¹{stats.freeMaterialLakh} Lakh+</p>
+          <h3 class="h4">of study material â€” free</h3>
+          <p class="small">Our study materials, worth more than â‚¹{stats.freeMaterialLakh} lakh, cost you nothing.</p>
+        </article>
+        <article class="free__item" data-reveal="up">
+          <p class="free__big">24 Ã— 7</p>
+          <h3 class="h4">doubt clearance</h3>
+          <p class="small">Round-the-clock support through our free Learning Club programs.</p>
+        </article>
+        <article class="free__item" data-reveal="up">
+          <p class="free__big">1,00,000</p>
+          <h3 class="h4">students, one challenge</h3>
+          <p class="small">The #100K Coding Challenge: ten tutorial videos in Malayalam, built to teach programming to one lakh students.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADMISSION -->
+  <section class="section" data-theme="paper">
+    <div class="wrap">
+      <SectionHead no="06" label="Admission" meta="Three steps">
+        <Fragment slot="title">Three steps <span class="serif accent">in.</span></Fragment>
+      </SectionHead>
+      <ol class="steps">
+        {admission.map((a) => (
+          <li class="step" data-reveal="up">
+            <span class="step__no">{a.no}</span>
+            <h3 class="h4">{a.title}</h3>
+            <p class="body">{a.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- LIFE -->
+  <section class="life section--flush" data-theme="dark">
+    <Marquee speed={70} class="life__mq">
+      {moments.map((m) => (
+        <span class="mq__item wall__item"><span>{m}</span><i aria-hidden="true"></i></span>
+      ))}
+    </Marquee>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" data-theme="dark" id="faq">
+    <div class="wrap split">
+      <div class="split__head">
+        <span class="label"><span class="label__no">07</span> Questions</span>
+        <h2 class="h2" data-reveal="lines">Ask us <span class="serif accent">anything.</span></h2>
+        <p class="body" data-reveal="up">
+          The answers people actually want before they commit a year of their life. Something missing? Ask the
+          admissions team directly.
+        </p>
+        <nav class="faq-nav" aria-label="FAQ groups" data-reveal="up">
+          {groups.map((g) => <a class="tag" href={`#faq-${g.toLowerCase().replace(/\s+/g, '-')}`} data-cursor="link">{g}</a>)}
+        </nav>
+      </div>
+
+      <div class="split__body split__body--wide faq-groups">
+        {groups.map((g) => {
+          const items = faqs.filter((f) => f.group === g);
+          const start = faqs.findIndex((f) => f.group === g) + 1;
+          return (
+            <div class="faq-group" id={`faq-${g.toLowerCase().replace(/\s+/g, '-')}`}>
+              <h3 class="mono dim faq-group__name">{g}</h3>
+              <Faq items={items} start={start} />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- END -->
+  <section class="section end" data-theme="red">
+    <div class="wrap end__grid">
+      <h2 class="end__title" data-reveal="chars">Day one<br />is today.</h2>
+      <p class="lead end__text" data-reveal="up">
+        {inr(stats.placed)} people have already made the jump. The next batch is forming now.
+      </p>
+      <div class="end__cta" data-reveal="up">
+        <Button href="/apply/" label="Apply for AcademiQ Fellowship" variant="light" size="lg" />
+        <Button href="/pay-after-placement/" label="See how you pay" variant="ghost" size="lg" />
+      </div>
+    </div>
+  </section>
+</Base>
+

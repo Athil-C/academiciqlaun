@@ -1,0 +1,12 @@
+---
+/** Section label row + big title + optional aside. */
+const { no, label, meta, as: Tag = 'h2', size = 'h2' } = Astro.props;
+---
+<header class="head">
+  <div class="head__label">
+    <span class="label"><span class="label__no">{no}</span> {label}</span>
+    {meta && <span class="mono dimmer">{meta}</span>}
+  </div>
+  <Tag class={`${size} head__title`} data-reveal="lines"><slot name="title" /></Tag>
+  <div class="head__aside"><slot /></div>
+</header>

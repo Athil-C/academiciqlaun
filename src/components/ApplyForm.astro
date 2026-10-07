@@ -1,0 +1,70 @@
+﻿---
+import Button from './Button.astro';
+import { contacts } from '../data/site.js';
+
+const { id = 'apply', full = false } = Astro.props;
+const to = contacts.admissions.tel.replace(/\D/g, '');
+const status = ['Student / Scholar', 'Young Researcher', 'PhD Candidate', 'Faculty / Academic', 'Institutional Rep'];
+const domains = ['Higher Education', 'Research Cohorts', 'Academic Writing', 'Fellowships & Grants', 'Mentorship', 'International Affairs'];
+const modes = ['Global Community', 'Research Working Groups', 'Mentorship Circle'];
+---
+<form class="form" data-form="whatsapp" data-to={to} novalidate>
+  <div class="field" data-rule="name">
+    <label class="field__label" for={`${id}-name`}>
+      <span>01 — Full Name</span>
+      <span class="field__error" aria-live="polite"></span>
+    </label>
+    <div class="field__control">
+      <input id={`${id}-name`} name="name" type="text" autocomplete="name" placeholder="e.g. Athil " required />
+    </div>
+  </div>
+
+  <fieldset class="field">
+    <legend class="field__label"><span>02 — Academic Role</span></legend>
+    <div class="choices">
+      {status.map((s, i) => (
+        <label class="choice">
+          <input type="radio" name="status" value={s} checked={i === 0} />
+          <span>{s}</span>
+        </label>
+      ))}
+    </div>
+  </fieldset>
+
+  <fieldset class="field">
+    <legend class="field__label"><span>03 — Primary Area of Interest</span></legend>
+    <div class="choices">
+      {domains.map((s, i) => (
+        <label class="choice">
+          <input type="radio" name="domain" value={s} checked={i === 0} />
+          <span>{s}</span>
+        </label>
+      ))}
+    </div>
+  </fieldset>
+
+  {full && (
+    <fieldset class="field">
+      <legend class="field__label"><span>04 — Involvement Mode</span></legend>
+      <div class="choices">
+        {modes.map((s, i) => (
+          <label class="choice">
+            <input type="radio" name="mode" value={s} checked={i === 0} />
+            <span>{s}</span>
+          </label>
+        ))}
+      </div>
+    </fieldset>
+  )}
+
+  <Button type="submit" label="Join AcademiQ Network ↗" variant="light" size="lg" block magnetic={false} />
+
+  <p class="form__note">
+    Connect with scholars, access research working groups, and discover academic opportunities worldwide.{' '}
+    <a href={`mailto:${contacts.admissions.email}`}>{contacts.admissions.email}</a>
+  </p>
+
+  <p class="form__done mono" data-form-done hidden>
+    <span class="dot"></span> Thank you! Welcome to the AcademiQ network.
+  </p>
+</form>

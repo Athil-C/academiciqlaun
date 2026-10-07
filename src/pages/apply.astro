@@ -1,0 +1,190 @@
+﻿---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+import Arrow from '../components/Arrow.astro';
+import SectionHead from '../components/SectionHead.astro';
+import ApplyForm from '../components/ApplyForm.astro';
+import Faq from '../components/Faq.astro';
+import '../styles/blocks.css';
+import '../styles/pages/inner.css';
+import '../styles/pages/apply.css';
+
+import { stats, hubs, contacts, inr } from '../data/site.js';
+import { admission, faqs } from '../data/program.js';
+
+const desks = [contacts.admissions, contacts.official, contacts.hr, contacts.feedback];
+const quick = faqs.filter((f) => ['Who is eligible to join?', 'What is the fee structure?', 'Can I join as a remote learner?', 'How does admission work?'].includes(f.q));
+
+const lats = hubs.map((h) => h.lat);
+const lons = hubs.map((h) => h.lon);
+const span = Math.max(Math.max(...lats) - Math.min(...lats), Math.max(...lons) - Math.min(...lons));
+const map = hubs.map((h) => ({
+  ...h,
+  px: 14 + ((h.lon - Math.min(...lons)) / span) * 72 + (72 - ((Math.max(...lons) - Math.min(...lons)) / span) * 72) / 2,
+  py: 14 + ((Math.max(...lats) - h.lat) / span) * 72,
+}));
+---
+
+<Base
+  title="Apply â€” talk to a career expert"
+  description="Apply for AcademiQ Fellowship. Tell us who you are and a career expert will take it from there."
+  page="apply"
+  suffix=", LETâ€™S GO"
+  scene="apply"
+  footLead="Still here? That is a sign."
+>
+  <!-- HERO + FORM -->
+  <section class="phero section--clear go" data-theme="dark" data-stop="hero">
+    <div class="wrap go__grid">
+      <div class="go__copy">
+        <div class="phero__meta mono" data-phero-fade>
+          <span class="label">Apply</span>
+          <span><span class="dot"></span>&nbsp; Applications open</span>
+        </div>
+
+        <h1 class="phero__title" style="--ts:11.2;--ts-m:20" aria-label="Letâ€™s go, bro.">
+          <span class="phero__line" aria-hidden="true">
+            <span class="phero__mask"><span data-phero-in>LETâ€™S</span></span>
+            <span class="phero__mask phero__mask--serif"><span class="serif accent" data-phero-in>go,</span></span>
+          </span>
+          <span class="phero__line" aria-hidden="true">
+            <span class="bw"><span class="bw__box" data-pre-target data-pre-suffix="">BRO</span><span class="bw__rest bw__rest--tight">.</span></span>
+          </span>
+        </h1>
+
+        <p class="lead go__lead" data-phero-fade>
+          It takes a minute, and asking costs nothing. Tell us who you are, and a career expert will tell you â€”
+          honestly â€” whether AcademiQ Fellowship is the right move.
+        </p>
+
+        <ul class="go__facts" data-phero-fade>
+          <li><b>1 min</b><span class="mono">to apply</span></li>
+          <li><b>â‚¹0</b><span class="mono">tuition upfront*</span></li>
+          <li><b>{inr(stats.placed)}</b><span class="mono">placed so far</span></li>
+        </ul>
+      </div>
+
+      <div class="go__form" data-phero-fade>
+        <ApplyForm id="apply" full />
+      </div>
+    </div>
+  </section>
+
+  <!-- NEXT -->
+  <section class="section" data-theme="paper">
+    <div class="wrap">
+      <SectionHead no="01" label="What happens next" meta="Three steps">
+        <Fragment slot="title">After you hit <span class="serif accent">send.</span></Fragment>
+      </SectionHead>
+      <ol class="steps">
+        {admission.map((a) => (
+          <li class="step" data-reveal="up">
+            <span class="step__no">{a.no}</span>
+            <h3 class="h4">{a.title}</h3>
+            <p class="body">{a.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- DESKS -->
+  <section class="section" data-theme="dark">
+    <div class="wrap">
+      <SectionHead no="02" label="Talk to a human" meta="Every desk, directly">
+        <Fragment slot="title">Pick up the <span class="serif accent">phone.</span></Fragment>
+        <p class="body" data-reveal="up">No ticket numbers. No chatbots. Call or write to the desk you need.</p>
+      </SectionHead>
+
+      <div class="desks">
+        {desks.map((d, i) => (
+          <article class="desk card" data-reveal="up" data-tilt="3">
+            <header class="tile__top mono"><span>{String(i + 1).padStart(2, '0')}</span><span>{d.label}</span></header>
+            <a class="desk__phone" href={`tel:${d.tel}`} data-cursor="call">{d.phone}</a>
+            <a class="desk__mail" href={`mailto:${d.email}`} data-copy={d.email} data-copy-done="Email copied" data-cursor="copy">
+              <span>{d.email}</span>
+              <span class="orb" aria-hidden="true"><Arrow /></span>
+            </a>
+          </article>
+        ))}
+        <article class="desk desk--ceo card" data-theme="red" data-reveal="up" data-tilt="3">
+          <header class="tile__top mono"><span>05</span><span>{contacts.ceo.label}</span></header>
+          <p class="desk__phone">Nikhil Kilivayil</p>
+          <a class="desk__mail" href={`mailto:${contacts.ceo.email}`} data-copy={contacts.ceo.email} data-copy-done="Email copied" data-cursor="copy">
+            <span>{contacts.ceo.email}</span>
+            <span class="orb" aria-hidden="true"><Arrow /></span>
+          </a>
+          <p class="small">Founder &amp; CEO. He reads this inbox personally.</p>
+        </article>
+        <a class="desk desk--wa card" href={contacts.whatsapp} target="_blank" rel="noopener" data-reveal="up" data-cursor="open" data-cursor-text="Chat">
+          <header class="tile__top mono"><span>06</span><span>Fastest</span></header>
+          <p class="desk__phone">WhatsApp</p>
+          <p class="small">Message admissions directly, and keep the whole conversation in one place.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HUBS -->
+  <section class="hubs section" data-theme="paper" data-hubs>
+    <div class="wrap">
+      <SectionHead no="03" label="Walk in" meta="5 hubs Â· or fully remote">
+        <Fragment slot="title">Come and see <span class="serif accent">for yourself.</span></Fragment>
+      </SectionHead>
+
+      <div class="hubs__grid">
+        <ul class="hubs__list">
+          {map.map((h, i) => (
+            <li class="hub" data-hub={i} data-reveal="up">
+              <a class="hub__row" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`AcademiQ ${h.city}`)}`} target="_blank" rel="noopener" data-cursor="open" data-cursor-text="Map">
+                <span class="hub__code mono">{h.code}</span>
+                <span class="hub__city">{h.city}</span>
+                <span class="hub__tag mono">{h.tag}</span>
+                <span class="hub__addr">{h.address}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <figure class="atlas" data-reveal="scale" aria-label="Relative positions of the five AcademiQ hubs">
+          <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" data-atlas>
+            <g class="atlas__grid">
+              {Array.from({ length: 11 }).map((_, i) => <line x1={i * 10} y1="0" x2={i * 10} y2="100" />)}
+              {Array.from({ length: 11 }).map((_, i) => <line x1="0" y1={i * 10} x2="100" y2={i * 10} />)}
+            </g>
+            <g class="atlas__links">
+              {map.slice(1).map((h) => <line x1={map[0].px} y1={map[0].py} x2={h.px} y2={h.py} data-atlas-link />)}
+            </g>
+            {map.map((h, i) => (
+              <g class="atlas__node" data-atlas-node={i} transform={`translate(${h.px} ${h.py})`}>
+                <circle class="atlas__pulse" r="5" />
+                <circle class="atlas__dot" r={i === 0 ? 1.7 : 1.2} />
+                <text x="3.2" y="1.1">{h.code}</text>
+              </g>
+            ))}
+          </svg>
+          <figcaption class="mono">
+            <span>N â†‘</span>
+            <span>{map[0].lat.toFixed(2)}Â° N Â· {map[0].lon.toFixed(2)}Â° E</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK FAQ -->
+  <section class="section" data-theme="dark">
+    <div class="wrap split">
+      <div class="split__head">
+        <span class="label"><span class="label__no">04</span> Before you ask</span>
+        <h2 class="h2" data-reveal="lines">Quick <span class="serif accent">answers.</span></h2>
+        <div data-reveal="up"><Button href="/AcademiQ Fellowship/#faq" label="Read all the FAQs" variant="ghost" /></div>
+      </div>
+      <div class="split__body split__body--wide">
+        <Faq items={quick} />
+        <p class="mono dimmer" style="margin-top:1.5rem">*Pay After Placement. Terms and conditions apply.</p>
+      </div>
+    </div>
+  </section>
+</Base>
+

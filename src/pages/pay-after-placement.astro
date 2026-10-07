@@ -1,0 +1,312 @@
+﻿---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Faq from '../components/Faq.astro';
+import '../styles/pages/inner.css';
+import '../styles/pages/pap.css';
+
+import { stats, contacts, inr } from '../data/site.js';
+import { faqs } from '../data/program.js';
+
+const total = stats.upfrontPerSemester * stats.semesters;
+const fees = faqs.filter((f) => f.group === 'Fees');
+const steps = [
+  { no: '01', name: 'Apply', pay: 'Start here', text: 'Apply online. The admissions team calls you, answers everything, and walks you through the Pay After Placement terms.' },
+  { no: '02', name: 'Learn', pay: 'â‚¹0 tuition upfront', text: 'Twelve months of AcademiQ Fellowship. No tuition fee upfront, so your whole attention goes to the work.' },
+  { no: '03', name: 'Get placed', pay: 'Still â‚¹0 tuition', text: 'Finish the program and land a job as a software engineer, with the placement team working beside you.' },
+  { no: '04', name: 'Then pay', pay: 'Now it starts', text: 'You pay for the program only after you are placed and have started earning.' },
+];
+const ask = [
+  'Exactly how much do I pay after placement, and over how long?',
+  'What counts as being â€œplacedâ€?',
+  'What happens if I have to leave the program early?',
+  'What do I need to do to stay eligible for the money-back guarantee?',
+  'Are loans or EMI available to me if I choose to pay upfront?',
+];
+---
+
+<Base
+  title="Pay After Placement â€” â‚¹0 tuition upfront"
+  description="With Pay After Placement you pay for AcademiQ Fellowship only after you are placed and earning. Plus a 100% money-back guarantee. Terms and conditions apply."
+  page="pap"
+  suffix=", PAY LATER"
+  scene="pap"
+  footLead="Learn first. The bill can wait."
+>
+  <!-- HERO -->
+  <section class="phero section--clear" data-theme="dark" data-stop="hero">
+    <div class="wrap">
+      <div class="phero__meta mono" data-phero-fade>
+        <span class="label">Pay After Placement</span>
+        <span>No tuition fee upfront Â· *T&amp;C apply</span>
+      </div>
+
+      <h1 class="phero__title" style="--ts:14.6;--ts-m:18.5" aria-label="Pay after placement.">
+        <span class="phero__line" aria-hidden="true">
+          <span class="phero__mask"><span data-phero-in>PAY</span></span>
+          <span class="phero__mask phero__mask--serif"><span class="serif accent" data-phero-in>after</span></span>
+        </span>
+        <span class="phero__line" aria-hidden="true">
+          <span class="phero__mask"><span data-phero-in>PLACEMENT.</span></span>
+        </span>
+      </h1>
+
+      <div class="phero__foot">
+        <p class="lead phero__lead" data-phero-fade>
+          No tuition fee upfront. Pay only when you earn. It is the simplest promise we make â€” and the one that keeps us
+          honest.
+        </p>
+        <div class="phero__cta" data-phero-fade>
+          <Button href="#how" label="See how it works" variant="ghost" size="lg" icon="s" />
+          <Button href="/apply/" label="Apply with PAP" size="lg" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREMISE -->
+  <section class="section section--clear" data-theme="dark" data-stop="dust">
+    <div class="wrap state__grid">
+      <div class="state__label"><span class="label"><span class="label__no">01</span> The idea</span></div>
+      <p class="state__text" data-scrub-words>
+        Most courses take your money first and wish you luck afterwards. We would rather earn it.
+        <em>You pay for AcademiQ Fellowship only after you are placed and earning</em> â€” so you can focus on learning, not on the
+        fee.
+      </p>
+    </div>
+  </section>
+
+  <!-- HOW -->
+  <section class="section how" data-theme="paper" id="how">
+    <div class="wrap">
+      <SectionHead no="02" label="How it works" meta="Four steps Â· one payment trigger">
+        <Fragment slot="title">Four steps. One of them <span class="serif accent">costs money.</span></Fragment>
+      </SectionHead>
+
+      <ol class="steps steps--4 how__steps">
+        {steps.map((s, i) => (
+          <li class={`step how__step${i === steps.length - 1 ? ' how__step--pay' : ''}`} data-reveal="up">
+            <div class="how__top">
+              <span class="step__no">{s.no}</span>
+              <span class={`tag${i === steps.length - 1 ? ' tag--solid' : ''}`}>{s.pay}</span>
+            </div>
+            <h3 class="h4">{s.name}</h3>
+            <p class="body">{s.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- CHART -->
+  <section class="section chart" data-theme="dark" data-chart>
+    <div class="wrap">
+      <SectionHead no="03" label="The difference" meta="Tuition paid over time">
+        <Fragment slot="title">When the money <span class="serif accent">leaves</span> your account.</Fragment>
+        <p class="body" data-reveal="up">
+          Two ways to pay for the same program. One asks for â‚¹{inr(total)} before you have earned a rupee. The other
+          waits until you have a salary.
+        </p>
+      </SectionHead>
+
+      <figure class="chart__fig" data-reveal="fade">
+        <p class="chart__swipe mono">Swipe the chart â†’</p>
+        <div class="chart__scroll">
+        <svg viewBox="0 0 1200 560" role="img" aria-label={`Chart: with upfront payment you pay â‚¹${inr(stats.upfrontPerSemester)} at the start of each of two semesters. With Pay After Placement you pay nothing until you are placed.`}>
+          <!-- grid -->
+          <g class="chart__grid">
+            {[0, 1, 2, 3, 4].map((i) => <line x1="90" x2="1160" y1={470 - i * 95} y2={470 - i * 95} />)}
+          </g>
+          <g class="chart__y">
+            {['â‚¹0', 'â‚¹1L', 'â‚¹2L', 'â‚¹3L', 'â‚¹4L'].map((t, i) => <text x="72" y={475 - i * 95} text-anchor="end">{t}</text>)}
+          </g>
+
+          <!-- phases on the x axis -->
+          <g class="chart__x">
+            <line class="chart__axis" x1="90" x2="1160" y1="470" y2="470" />
+            <g transform="translate(90 470)"><line y2="12" /><text y="38">Day 1</text><text class="is-sub" y="58">Semester 1</text></g>
+            <g transform="translate(400 470)"><line y2="12" /><text y="38">Month 6</text><text class="is-sub" y="58">Semester 2</text></g>
+            <g transform="translate(710 470)"><line y2="12" /><text y="38">Month 12</text><text class="is-sub" y="58">Program ends</text></g>
+            <g transform="translate(900 470)" class="is-hot"><line y2="12" /><text y="38">Placed</text><text class="is-sub" y="58">Salary starts</text></g>
+          </g>
+
+          <!-- upfront: two steps -->
+          <path class="chart__line chart__line--up" data-chart-up d={`M90 470 L90 ${470 - 1.9 * 95} L400 ${470 - 1.9 * 95} L400 ${470 - 3.8 * 95} L1160 ${470 - 3.8 * 95}`} />
+          <g class="chart__tag" data-chart-tag transform={`translate(104 ${470 - 1.9 * 95 - 16})`}><text>â‚¹{inr(stats.upfrontPerSemester)}</text></g>
+          <g class="chart__tag" data-chart-tag transform={`translate(414 ${470 - 3.8 * 95 - 16})`}><text>â‚¹{inr(total)} Â· upfront payment</text></g>
+
+          <!-- pap: flat at zero, then begins -->
+          <path class="chart__line chart__line--pap" data-chart-pap d="M90 470 L900 470" />
+          <path class="chart__line chart__line--after" data-chart-after d="M900 470 C 980 440, 1060 400, 1160 360" />
+          <circle class="chart__dot" data-chart-dot cx="900" cy="470" r="9" />
+          <g class="chart__tag chart__tag--pap" data-chart-tag transform="translate(520 446)"><text>â‚¹0 Â· Pay After Placement</text></g>
+          <g class="chart__tag chart__tag--pap" data-chart-tag transform="translate(924 336)"><text>payments begin,</text><text y="22">as per your agreement</text></g>
+        </svg>
+        </div>
+        <figcaption class="mono dim">
+          <span><i class="chart__key chart__key--up"></i>Upfront payment</span>
+          <span><i class="chart__key chart__key--pap"></i>Pay After Placement</span>
+          <span>Upfront figures as published by AcademiQ. PAP amounts depend on your agreement and are not drawn to scale.</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- OPTIONS -->
+  <section class="section opts" data-theme="paper" data-options>
+    <div class="wrap">
+      <SectionHead no="04" label="Your options" meta="Pick what suits you">
+        <Fragment slot="title">Two ways to <span class="serif accent">pay.</span></Fragment>
+      </SectionHead>
+
+      <div class="opts__grid">
+        <article class="opt opt--pap card" data-theme="dark" data-reveal="up" data-tilt="3">
+          <header class="opt__top mono"><span>Option A</span><span class="tag tag--solid">Pay when you earn</span></header>
+          <h3 class="opt__name">Pay After Placement</h3>
+          <p class="opt__price"><b>â‚¹0</b><span class="mono">tuition upfront</span></p>
+          <ul class="opt__list">
+            <li>Pay for the program only after you are placed and earning</li>
+            <li>No tuition fee while you learn</li>
+            <li>Focus on building your career, not on the fee</li>
+            <li>Full terms set out in your PAP agreement</li>
+          </ul>
+          <Button href="/apply/" label="Apply with PAP" block />
+        </article>
+
+        <article class="opt card" data-reveal="up" data-tilt="3">
+          <header class="opt__top mono"><span>Option B</span><span>For those who prefer it</span></header>
+          <h3 class="opt__name">Upfront payment</h3>
+          <p class="opt__price"><b>â‚¹{inr(stats.upfrontPerSemester)}</b><span class="mono">per semester Ã— {stats.semesters}</span></p>
+          <ul class="opt__list">
+            <li>â‚¹{inr(total)} in total, across two semesters</li>
+            <li>Loans and EMI arranged by the finance team, based on eligibility</li>
+            <li>Same program, same reviews, same placement support</li>
+            <li>Covered by the 100% money-back guarantee</li>
+          </ul>
+          <Button href="/apply/" label="Ask about upfront & EMI" variant="light" block />
+        </article>
+      </div>
+
+      <p class="opts__note" data-reveal="up">
+        <span class="mono accent">Either way</span>
+        There are no additional fees during the program. A fee applies only if you need to attend a supplementary exam.
+      </p>
+    </div>
+  </section>
+
+  <!-- GUARANTEE -->
+  <section class="section vow" data-theme="red">
+    <div class="wrap vow__grid">
+      <div class="vow__stamp" data-reveal="scale" aria-hidden="true">
+        <svg viewBox="0 0 300 300">
+          <defs><path id="vow-path" d="M150,150 m-122,0 a122,122 0 1,1 244,0 a122,122 0 1,1 -244,0" /></defs>
+          <g class="vow__spin">
+            <text><textPath href="#vow-path" textLength="756" lengthAdjust="spacing">100% MONEY-BACK GUARANTEE âœ¦ NOT PLACED? MONEY BACK âœ¦</textPath></text>
+          </g>
+          <circle cx="150" cy="150" r="96" />
+        </svg>
+        <b>100<small>%</small></b>
+      </div>
+
+      <div class="vow__copy">
+        <span class="label label--plain">The guarantee</span>
+        <h2 class="h1" data-reveal="lines">Not placed?<br />Money back.</h2>
+        <p class="lead" data-reveal="up">AcademiQ Fellowship carries a 100% money-back guarantee. It comes with exactly two conditions.</p>
+        <ol class="vow__list">
+          <li data-reveal="up"><span class="vow__no">1</span><p><strong>You finish.</strong> Complete the program within 12 months.</p></li>
+          <li data-reveal="up"><span class="vow__no">2</span><p><strong>We do not deliver.</strong> You are not placed within the following 12 months.</p></li>
+        </ol>
+        <p class="vow__result" data-reveal="up">Then you get your investment back. <span class="mono">*Terms and conditions apply</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="section" data-theme="dark">
+    <div class="wrap">
+      <SectionHead no="05" label="Why we do it" meta="Incentives, aligned">
+        <Fragment slot="title">We win only when <span class="serif accent">you</span> win.</Fragment>
+      </SectionHead>
+      <div class="tiles">
+        <article class="tile card" data-reveal="up" data-tilt="4">
+          <header class="tile__top mono"><span>01</span><span>Access</span></header>
+          <span class="tile__glyph" aria-hidden="true">{stats.nonIt}%</span>
+          <div class="tile__body">
+            <h3 class="h4">Talent is everywhere. Savings are not.</h3>
+            <p class="small">{stats.nonIt}% of our placed students came from outside IT. An upfront fee would have stopped many of them at the door.</p>
+          </div>
+        </article>
+        <article class="tile card" data-reveal="up" data-tilt="4">
+          <header class="tile__top mono"><span>02</span><span>Focus</span></header>
+          <span class="tile__glyph" aria-hidden="true">12</span>
+          <div class="tile__body">
+            <h3 class="h4">A year is hard enough already.</h3>
+            <p class="small">Twelve intensive months go better when you are thinking about code, not about an instalment that is due.</p>
+          </div>
+        </article>
+        <article class="tile card" data-reveal="up" data-tilt="4">
+          <header class="tile__top mono"><span>03</span><span>Accountability</span></header>
+          <span class="tile__glyph" aria-hidden="true">1:1</span>
+          <div class="tile__body">
+            <h3 class="h4">Your outcome is our outcome.</h3>
+            <p class="small">When we are paid after you are placed, every review, every mock interview and every referral matters to us too.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ASK -->
+  <section class="section" data-theme="paper">
+    <div class="wrap split">
+      <div class="split__head">
+        <span class="label"><span class="label__no">06</span> Read before you sign</span>
+        <h2 class="h2" data-reveal="lines">Ask us the <span class="serif accent">awkward</span> questions.</h2>
+        <p class="body" data-reveal="up">
+          Pay After Placement is an agreement, and you should understand every line of it. Take this list into your call
+          with admissions. A good institute will enjoy answering them.
+        </p>
+        <div data-reveal="up" style="display:flex;flex-wrap:wrap;gap:.6rem">
+          <Button href={`tel:${contacts.admissions.tel}`} label={contacts.admissions.phone} variant="light" icon="ne" />
+        </div>
+      </div>
+
+      <ol class="split__body asks">
+        {ask.map((q, i) => (
+          <li class="asks__item" data-reveal="up" data-ask>
+            <span class="asks__box" aria-hidden="true"></span>
+            <span class="mono dim">{String(i + 1).padStart(2, '0')}</span>
+            <p>{q}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" data-theme="dark">
+    <div class="wrap split">
+      <div class="split__head">
+        <span class="label"><span class="label__no">07</span> Fees, answered</span>
+        <h2 class="h2" data-reveal="lines">The short <span class="serif accent">answers.</span></h2>
+        <div data-reveal="up"><Button href="/AcademiQ Fellowship/#faq" label="All program FAQs" variant="ghost" /></div>
+      </div>
+      <div class="split__body split__body--wide">
+        <Faq items={fees} />
+      </div>
+    </div>
+  </section>
+
+  <!-- END -->
+  <section class="section end" data-theme="red">
+    <div class="wrap end__grid">
+      <h2 class="end__title" data-reveal="chars">Earn first.<br />Pay later.</h2>
+      <p class="lead end__text" data-reveal="up">The only thing you put on the line is twelve months of hard work.</p>
+      <div class="end__cta" data-reveal="up">
+        <Button href="/apply/" label="Apply with PAP" variant="light" size="lg" />
+        <Button href={contacts.whatsapp} label="Ask on WhatsApp" variant="ghost" size="lg" />
+      </div>
+    </div>
+  </section>
+</Base>
