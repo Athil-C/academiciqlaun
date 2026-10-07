@@ -1,4 +1,4 @@
-﻿---
+---
 import Button from './Button.astro';
 import { nav, contacts, hubs, socials, external, partners, brand } from '../data/site.js';
 const year = new Date().getFullYear();
@@ -14,7 +14,7 @@ const { lead = 'Your next opportunity could start here.' } = Astro.props;
           Join a growing network of students, researchers, scholars and mentors learning, collaborating and creating opportunities together.
         </p>
         <div style="display:flex;flex-wrap:wrap;gap:.75rem">
-          <Button href="#apply" label="Join AcademiQ ↗" />
+          <Button href="#apply" label="Join AcademiQ " />
           <Button href={`mailto:${contacts.official.email}`} label="Start a conversation" variant="ghost" />
         </div>
       </div>

@@ -132,7 +132,7 @@
   padding-top: 0.075em;
 }
 
-.hero__mask>span {
+.hero__mask > span {
   display: block;
 }
 
@@ -181,7 +181,7 @@
   grid-column: 10 / -1;
   display: grid;
   gap: 0.4rem;
-  justify-content: end;
+  justify-items: end;
   text-align: right;
 }
 
@@ -345,7 +345,6 @@
 }
 
 @media (max-width: 900px) {
-
   .mani__label,
   .mani__text,
   .mani__aside {
@@ -441,7 +440,7 @@
   backdrop-filter: blur(10px);
 }
 
-.pap__guard>div:last-child {
+.pap__guard > div:last-child {
   display: grid;
   gap: 0.4rem;
 }
@@ -564,8 +563,7 @@
   text-align: right;
 }
 
-.jour__view,
-.jour__track-wrap {
+.jour__view {
   min-height: 0;
   display: flex;
   align-items: stretch;
@@ -578,14 +576,13 @@
   will-change: transform;
 }
 
-.phase,
-.jour__card {
+.phase {
   flex: none;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto auto;
-  gap: clamp(1rem, 2vh, 1.75rem);
-  width: clamp(21rem, 28vw, 26rem);
-  padding: clamp(1.2rem, 1.8vw, 2rem);
+  gap: clamp(1rem, 2vh, 2rem);
+  width: clamp(19rem, 31vw, 34rem);
+  padding: clamp(1.1rem, 1.6vw, 1.9rem);
   --card: var(--paper-2);
   background: var(--card);
   color: var(--fg);
@@ -593,23 +590,18 @@
   transition: background 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
 }
 
-.phase:hover,
-.jour__card:hover {
+.phase:hover {
   --card: #fff;
   box-shadow: inset 0 0 0 1px var(--rule);
 }
 
-.phase__top,
-.jour__card-head {
+.phase__top {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  font-size: 0.8rem;
-  color: var(--fg-2);
 }
 
-.phase__no,
-.jour__no {
+.phase__no {
   font-weight: 800;
   font-stretch: 75%;
   font-size: clamp(2.4rem, min(5vw, 8.5vh), 5.2rem);
@@ -622,25 +614,9 @@
 }
 
 .phase:hover .phase__no,
-.phase.is-now .phase__no,
-.jour__card:hover .jour__no,
-.jour__card.is-now .jour__no {
+.phase.is-now .phase__no {
   color: var(--red);
   -webkit-text-stroke-color: var(--red);
-}
-
-.jour__dur {
-  font-size: 0.75rem;
-  padding: 0.2rem 0.55rem;
-  border-radius: 99px;
-  background: var(--surface);
-  border: 1px solid var(--rule);
-}
-
-.jour__verb {
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
 .phase__body {
@@ -649,67 +625,14 @@
   align-content: end;
 }
 
-.phase__big,
-.jour__name {
+.phase__big {
   align-self: center;
-  font-family: var(--f-display);
   font-weight: 800;
   font-stretch: 75%;
-  font-size: clamp(2rem, min(3.8vw, 6vh), 3.2rem);
-  line-height: 0.95;
+  font-size: clamp(2.8rem, min(5.6vw, 9.5vh), 6rem);
+  line-height: 0.8;
   letter-spacing: -0.03em;
   text-transform: uppercase;
-  color: var(--fg);
-}
-
-.jour__text {
-  font-size: clamp(0.95rem, min(1.05vw, 2vh), 1.15rem);
-  line-height: 1.45;
-  color: var(--fg-2);
-}
-
-.jour__out {
-  display: flex;
-  align-items: center;
-  gap: 0.8em;
-  padding-top: 0.9rem;
-  border-top: 1px solid var(--rule);
-  color: var(--fg);
-  font-size: 0.85rem;
-}
-
-.jour__card--end {
-  background: var(--red);
-  color: #fff;
-  box-shadow: none;
-}
-
-.jour__card--end:hover {
-  background: var(--red);
-  box-shadow: none;
-}
-
-.jour__card--end .jour__no {
-  color: #fff;
-  -webkit-text-stroke-color: #fff;
-}
-
-.jour__card--end:hover .jour__no {
-  color: var(--ink);
-  -webkit-text-stroke-color: var(--ink);
-}
-
-.jour__card--end .jour__name {
-  color: #fff;
-}
-
-.jour__card--end .lead,
-.jour__card--end .body {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.jour__card--end .btn {
-  justify-self: start;
 }
 
 @media (max-height: 780px) {
@@ -841,25 +764,21 @@
   color: var(--fg-3);
 }
 
-@media (max-width: 800px),
-(max-height: 560px) {
-
+@media (max-width: 800px), (max-height: 560px) {
   /* no pinning on small screens: a native swipe rail instead */
   .jour__pin {
     height: auto;
     padding-block: var(--section);
   }
 
-  .jour__view,
-  .jour__track-wrap {
+  .jour__view {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
 
-  .jour__view::-webkit-scrollbar,
-  .jour__track-wrap::-webkit-scrollbar {
+  .jour__view::-webkit-scrollbar {
     display: none;
   }
 
@@ -867,9 +786,8 @@
     transform: none !important;
   }
 
-  .phase,
-  .jour__card {
-    width: min(84vw, 23rem);
+  .phase {
+    width: min(82vw, 24rem);
     min-height: 26rem;
     scroll-snap-align: center;
   }
@@ -1238,18 +1156,17 @@
   line-height: 1;
 }
 
-.note__mail>span:first-child {
+.note__mail > span:first-child {
   background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
   padding-bottom: 0.12em;
   transition: background-size 0.6s var(--ease-out), color 0.3s;
 }
 
-.note__mail:hover>span:first-child {
+.note__mail:hover > span:first-child {
   color: var(--red-hot);
 }
 
 @media (max-width: 900px) {
-
   .note__label,
   .note__quote,
   .note__foot {
@@ -1261,3 +1178,4 @@
     gap: 1.25rem;
   }
 }
+
